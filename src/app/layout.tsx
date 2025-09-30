@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "BeliBeli | Sua Loja Online de Produtos",
   description: "Bem-vindo à BeliBeli Store! Explore nossa loja online e encontre os melhores produtos com qualidade e praticidade em um só lugar.",
+  icons: "/belilogo.png"
 };
 
 export default function RootLayout({
