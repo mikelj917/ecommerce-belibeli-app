@@ -8,7 +8,7 @@ export const MobileBottomNav = () => {
   const [active, setActive] = useState("Home");
 
   return (
-    <nav className="fixed bottom-0 flex w-full items-center justify-around bg-white p-1 inset-shadow-2xs">
+    <nav className="fixed bottom-0 flex w-full items-center justify-around bg-white p-1 inset-shadow-2xs lg:hidden">
       {bottomNavItems.map((item) => (
         <MobileBottomNavItem
           key={item.label}

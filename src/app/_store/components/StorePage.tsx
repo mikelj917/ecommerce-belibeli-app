@@ -1,13 +1,14 @@
 import { MobileBottomNav } from "./Mobile/BottomNav/BottomNav";
 import { Header } from "./Header/Header";
+import { Main } from "./Main/Main";
+import { HeroBanner } from "./HeroBanner";
 
 export const StorePage = () => {
   return (
-    <div className="container">
+    <div className="relative z-10">
       <Header />
-      <main className="pt-26 pb-13">
-        
-      </main>
+      <HeroBanner />
+      <Main />
       <MobileBottomNav />
     </div>
   );

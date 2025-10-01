@@ -4,7 +4,7 @@ export const SearchInput = () => {
       <input
         placeholder="Ache os seus produtos de forma rápida..."
         type="text"
-        className="w-full rounded-full border border-black/90 pl-10 px-3 py-2 outline-none text-ellipsis"
+        className="w-full rounded-full border border-black/90 px-3 py-2 pl-10 text-ellipsis outline-none"
       />
 
       <svg

@@ -20,7 +20,7 @@ export const MobileBottomNavItem = ({
       className="flex flex-1 flex-col items-center justify-center"
     >
       <IconMobileButton>{icon(isActive)}</IconMobileButton>
-      <span className="text-sm">{label}</span>
+      <span className="text-sm font-bold">{label}</span>
     </div>
   );
 };

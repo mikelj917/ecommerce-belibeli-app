@@ -1,5 +1,9 @@
-import { CartIcon, CategoryIcon, HomeIcon, ProfileIcon } from "../../../../assets/Icons";
-
+import {
+  CartIcon,
+  CategoryIcon,
+  HomeIcon,
+  ProfileIcon,
+} from "../../../../../assets/Icons";
 
 export const bottomNavItems = [
   {

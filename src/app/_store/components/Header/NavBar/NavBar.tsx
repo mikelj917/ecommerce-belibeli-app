@@ -7,9 +7,9 @@ export const NavBar = () => {
     <nav className="flex w-full items-center gap-3">
       <SearchInput />
       <div className="flex gap-4">
-        {headerNavBarIcons.map((icon => (
-          <IconMobileButton>{icon}</IconMobileButton>
-        )))}
+        {headerNavBarIcons.map((icon) => (
+          <IconMobileButton key={icon.key}>{icon.icon}</IconMobileButton>
+        ))}
       </div>
     </nav>
   );
