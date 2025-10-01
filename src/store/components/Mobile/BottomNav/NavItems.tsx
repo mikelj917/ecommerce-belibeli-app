@@ -1,7 +1,7 @@
-import { CartIcon, CategoryIcon, HomeIcon, ProfileIcon } from "./Icons";
+import { CartIcon, CategoryIcon, HomeIcon, ProfileIcon } from "../../../../assets/Icons";
 
 
-export const navItems = [
+export const bottomNavItems = [
   {
     label: "Home",
     icon: (isActive: boolean) => (

@@ -17,7 +17,7 @@ export const MobileBottomNavItem = ({
   return (
     <div
       onClick={onClick}
-      className="flex cursor-pointer flex-col items-center justify-center"
+      className="flex flex-1 flex-col items-center justify-center"
     >
       <IconMobileButton>{icon(isActive)}</IconMobileButton>
       <span className="text-sm">{label}</span>

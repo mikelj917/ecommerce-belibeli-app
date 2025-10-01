@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { MobileBottomNavItem } from "./MobileBottomNavItem";
-import { navItems } from "./BottomNavItems";
+import { MobileBottomNavItem } from "./NavItem";
+import { bottomNavItems } from "./NavItems";
 
 export const MobileBottomNav = () => {
   const [active, setActive] = useState("Home");
 
   return (
-    <div className="fixed bottom-0 flex w-full items-center justify-around bg-white p-1 inset-shadow-2xs">
-      {navItems.map((item) => (
+    <nav className="fixed bottom-0 flex w-full items-center justify-around bg-white p-1 inset-shadow-2xs">
+      {bottomNavItems.map((item) => (
         <MobileBottomNavItem
           key={item.label}
           icon={item.icon}
@@ -18,6 +18,6 @@ export const MobileBottomNav = () => {
           onClick={() => setActive(item.label)}
         />
       ))}
-    </div>
+    </nav>
   );
 };

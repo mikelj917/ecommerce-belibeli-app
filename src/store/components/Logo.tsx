@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/assets/belilogo-nobg.png";
+import logo from "@/assets/logo/belilogo-nobg.png";
 
 type Props = {
   width?: number;
