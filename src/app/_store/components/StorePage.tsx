@@ -1,7 +1,7 @@
 import { MobileBottomNav } from "./Mobile/BottomNav/BottomNav";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
-import { HeroBanner } from "./HeroBanner";
+import { HeroBanner } from "./Banner/HeroBanner";
 
 export const StorePage = () => {
   return (

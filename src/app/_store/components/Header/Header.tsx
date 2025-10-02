@@ -1,5 +1,5 @@
 import { CategoryBar } from "./CategoryBar/CategoryBar";
-import { Logo } from "../Logo";
+import { Logo } from "../../../../shared/components/Logo";
 import { NavBar } from "./NavBar/NavBar";
 
 export const Header = () => {
