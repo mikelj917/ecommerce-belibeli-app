@@ -5,7 +5,7 @@ import { HeroBanner } from "./Banner/HeroBanner";
 
 export const StorePage = () => {
   return (
-    <div className="relative z-10">
+    <div className="relative z-10 overflow-x-hidden">
       <Header />
       <HeroBanner />
       <Main />
