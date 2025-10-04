@@ -3,10 +3,12 @@ import { categoryItems } from "./CategoryItems";
 
 export const CategoriesSection = () => {
   return (
-    <div className="mx-auto grid auto-cols-max grid-flow-col grid-rows-1 gap-10 px-4 py-6">
-      {categoryItems.map((cat) => (
-        <CategoryItem key={cat.label} logo={cat.logo} label={cat.label} />
-      ))}
+    <div className="overflow-x-auto">
+      <div className="grid auto-cols-max grid-flow-col grid-rows-1 gap-6 py-10 sm:justify-center">
+        {categoryItems.map((cat) => (
+          <CategoryItem key={cat.label} logo={cat.logo} label={cat.label} />
+        ))}
+      </div>
     </div>
   );
 };
