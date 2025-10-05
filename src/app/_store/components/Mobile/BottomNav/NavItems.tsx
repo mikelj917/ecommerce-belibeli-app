@@ -1,5 +1,5 @@
 import {
-  CartIcon,
+  ShoppingCartIcon,
   CategoryIcon,
   HomeIcon,
   ProfileIcon,
@@ -29,7 +29,7 @@ export const bottomNavItems = [
   {
     label: "Carrinho",
     icon: (isActive: boolean) => (
-      <CartIcon
+      <ShoppingCartIcon
         className={
           isActive ? "fill-current stroke-none" : "fill-none stroke-current"
         }

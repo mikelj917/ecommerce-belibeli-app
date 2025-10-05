@@ -1,6 +1,6 @@
 import type { FC, SVGProps } from "react";
 
-export const CartIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) =>(
+export const BagIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) =>(
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"

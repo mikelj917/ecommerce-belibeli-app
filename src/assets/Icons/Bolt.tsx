@@ -1,10 +1,11 @@
 import type { FC, SVGProps } from "react";
 
-export const Bolt: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
+export const BoltIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
+    strokeWidth={1.5}
     className={`size-7 ${className}`}
   >
     <path
