@@ -1,4 +1,4 @@
-import { Logo } from "@/shared/components/Logo";
+import { Logo } from "@/assets/logo/BeliLogoNoBg";
 
 export const HeaderLogo = () => {
   return (
