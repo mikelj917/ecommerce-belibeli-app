@@ -12,7 +12,7 @@ const handleContentClick = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-export const MenuModal = ({
+export const SideMenu = ({
   onClose,
   backgroundClassName,
   sideMenuClassName,

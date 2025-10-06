@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Gravitas_One } from "next/font/google";
 import "./globals.css";
+import { SideMenuProvider } from "./_store/contexts/SideMenuMobile";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,7 +11,7 @@ const geistSans = Geist({
 const gravitasOne = Gravitas_One({
   variable: "--font-gravitas-one",
   subsets: ["latin"],
-  weight: "400"
+  weight: "400",
 });
 
 const geistMono = Geist_Mono({
@@ -32,11 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gravitasOne.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <SideMenuProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${gravitasOne.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </SideMenuProvider>
     </html>
   );
 }

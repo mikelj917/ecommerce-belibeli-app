@@ -4,11 +4,11 @@ import { SearchInput } from "./SearchInput";
 import { headerActionIcons } from "./MenuItems";
 import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
-import { useState } from "react";
-import { MenuModal } from "./MenuModal";
+import { SideMenu } from "./SideMenu";
+import { useSideMenu } from "@/app/_store/contexts/SideMenuMobile";
 
 export const NavBar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();
 
   return (
     <nav className="flex gap-3 lg:gap-17">
@@ -18,7 +18,10 @@ export const NavBar = () => {
         <div className="flex gap-4">
           {headerActionIcons.map((icon) => {
             return icon.key === "Menu" ? (
-              <IconMobileButton key={icon.key} onClick={() => setIsOpen(true)}>
+              <IconMobileButton
+                key={icon.key}
+                onClick={() => setIsSideMenuMobOpen(true)}
+              >
                 {icon.icon}
               </IconMobileButton>
             ) : (
@@ -26,10 +29,16 @@ export const NavBar = () => {
             );
           })}
         </div>
-        <MenuModal
-          onClose={() => setIsOpen(false)}
-          backgroundClassName={isOpen ? "opacity-100 bg-black/70" : "opacity-0 pointer-events-none"}
-          sideMenuClassName={isOpen ? "translate-x-0" : "translate-x-full"}
+        <SideMenu
+          onClose={() => setIsSideMenuMobOpen(false)}
+          backgroundClassName={
+            isSideMenuMobOpen
+              ? "opacity-100 bg-black/70"
+              : "opacity-0 pointer-events-none"
+          }
+          sideMenuClassName={
+            isSideMenuMobOpen ? "translate-x-0" : "translate-x-full"
+          }
         />
       </div>
     </nav>
