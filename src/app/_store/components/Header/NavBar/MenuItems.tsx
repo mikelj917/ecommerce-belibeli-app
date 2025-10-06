@@ -13,6 +13,7 @@ import {
   CreditCardIcon,
   ShoppingCartIcon,
 } from "@/assets/Icons";
+import { link } from "fs";
 
 export const headerActionIcons = [
   {
@@ -20,7 +21,9 @@ export const headerActionIcons = [
     key: "Heart",
   },
   {
-    icon: <ShoppingCartIcon className="cursor-pointer fill-none stroke-current" />,
+    icon: (
+      <ShoppingCartIcon className="cursor-pointer fill-none stroke-current" />
+    ),
     key: "Cart",
   },
   {
@@ -51,6 +54,7 @@ export const sideMenuMainLinks = [
   {
     icon: <CategoryIcon className="fill-none stroke-black" />,
     label: "Categorias",
+    link: "#categoriesSection"
   },
   {
     icon: <SparklesIcon className="fill-none stroke-black" />,
@@ -60,6 +64,7 @@ export const sideMenuMainLinks = [
     icon: <BoltIcon className="fill-none stroke-red-500" />,
     className: "text-red-500",
     label: "Ofertas Relâmpago",
+    link: "#flashSaleSection"
   },
 ];
 

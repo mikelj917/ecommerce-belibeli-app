@@ -1,4 +1,4 @@
-import { MobileBottomNav } from "./Mobile/BottomNav/BottomNav";
+import { MobileBottomNav } from "./MobileBottomNav/BottomNav";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 import { HeroBanner } from "./Banner/HeroBanner";

@@ -1,6 +1,6 @@
 import { DownloadIcon } from "@/assets/Icons";
 import { SideMenuItem } from "./SideMenuItem";
-import { sideMenuMainLinks, sideMenuSupportLinks } from "./MenuItems";
+import { sideMenuMainLinks, sideMenuSupportLinks } from "../MenuItems";
 
 type Props = {
   onClose: () => void;
@@ -44,17 +44,20 @@ export const SideMenu = ({
                 icon={item.icon}
                 label={item.label}
                 className={item.className}
+                link={item.link}
+                onClick={onClose}
               />
             ))}
           </div>
 
           <div className="border-t-1 border-black/30 px-4 pt-3">
-            <h1 className="text-2xl font-bold mb-4">Suporte</h1>
+            <h1 className="mb-4 text-2xl font-bold">Suporte</h1>
             {sideMenuSupportLinks.map((item) => (
               <SideMenuItem
                 key={item.label}
                 icon={item.icon}
                 label={item.label}
+                onClick={onClose}
               />
             ))}
 

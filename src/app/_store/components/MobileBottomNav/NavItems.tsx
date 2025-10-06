@@ -3,7 +3,7 @@ import {
   CategoryIcon,
   HomeIcon,
   ProfileIcon,
-} from "../../../../../assets/Icons";
+} from "../../../../assets/Icons";
 
 export const bottomNavItems = [
   {

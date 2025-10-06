@@ -4,7 +4,7 @@ import { SearchInput } from "./SearchInput";
 import { headerActionIcons } from "./MenuItems";
 import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
-import { SideMenu } from "./SideMenu";
+import { SideMenu } from "./SideMenu/SideMenu";
 import { useSideMenu } from "@/app/_store/contexts/SideMenuMobile";
 
 export const NavBar = () => {
