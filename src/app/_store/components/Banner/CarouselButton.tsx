@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "@/assets/Icons";
+import { ChevronLeft, ChevronRight } from "@/assets/Icons";
 
 type Props = {
   direction: string;
@@ -13,7 +13,7 @@ export const CarouselButton = ({ direction, onClick }: Props) => {
       }`}
       onClick={onClick}
     >
-      {direction === "prev" ? <ArrowLeft /> : <ArrowRight />}
+      {direction === "prev" ? <ChevronLeft /> : <ChevronRight />}
     </button>
   );
 };

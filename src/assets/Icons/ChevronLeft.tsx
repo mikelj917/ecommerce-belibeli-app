@@ -1,6 +1,6 @@
 import type { FC, SVGProps } from "react";
 
-export const ArrowRight: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
+export const ChevronLeft: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -12,7 +12,7 @@ export const ArrowRight: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+      d="M15.75 19.5 8.25 12l7.5-7.5"
     />
   </svg>
 );

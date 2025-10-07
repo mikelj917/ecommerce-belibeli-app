@@ -4,6 +4,8 @@ type Props = {
   title: string;
   price: number;
   imageURL: string;
+  totalQuantity: number;
+  soldQuantity: number;
   rating?: {
     rate: number;
     count: number;
@@ -16,17 +18,17 @@ export const ProductCard = ({
   title,
   price,
   imageURL,
+  totalQuantity,
+  soldQuantity,
   rating,
   toWish,
   onSale,
 }: Props) => {
-  const productQuantity = Math.floor(Math.random() * (300 - 20) + 20);
-  const productsSold = Math.floor(Math.random() * productQuantity);
-  const percent = Math.floor((productsSold / productQuantity) * 100);
+  const percent = Math.floor((soldQuantity / totalQuantity) * 100);
   const percentString = `${percent}%`;
 
   return (
-    <div className="w-60 cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105">
+    <div className="w-60 flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105">
       {/* Image + Favorite Button */}
       <div className="relative bg-black/10 p-4">
         <img
@@ -56,7 +58,7 @@ export const ProductCard = ({
             {rating?.rate.toFixed(1) ?? "–"}
           </span>
           <span className="mx-1">·</span>
-          <span>{rating?.count ? `${productsSold} vendidos` : "Novo"}</span>
+          <span>{rating?.count ? `${soldQuantity} vendidos` : "Novo"}</span>
         </div>
 
         {/* Price */}
@@ -87,7 +89,7 @@ export const ProductCard = ({
                 style={{ width: percentString }}
               ></div>
             </div>
-            <span className="text-xs text-gray-500">{`${productsSold}/${productQuantity} Vendidos`}</span>
+            <span className="text-xs text-gray-500">{`${soldQuantity}/${totalQuantity} Vendidos`}</span>
           </div>
         )}
       </div>
