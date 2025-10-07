@@ -1,7 +1,7 @@
 "use client";
 import { useProducts } from "@/app/_store/hooks/useProducts";
 import { SectionHeader } from "./SectionHeader";
-import { ProductCard } from "../ProductsSection/ProductCard";
+import { ProductCard } from "../ForYouSection/ProductCard";
 import { ArrowLongLeft, ArrowLongRight } from "@/assets/Icons";
 import { useRef, useState } from "react";
 
@@ -38,14 +38,14 @@ export const FlashSaleSection = () => {
             <button
               onClick={handlePrev}
               disabled={!canGoPrev}
-              className="cursor-pointer rounded-md border-1 px-3"
+              className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white"
             >
               {<ArrowLongLeft />}
             </button>
             <button
               onClick={handleNext}
               disabled={!canGoNext}
-              className="cursor-pointer rounded-md border-1 px-3"
+              className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white"
             >
               {<ArrowLongRight />}
             </button>
@@ -71,6 +71,7 @@ export const FlashSaleSection = () => {
                 soldQuantity={product.soldQuantity}
                 rating={product.rating}
                 onSale={true}
+                grid={true}
               />
             ))}
           </div>

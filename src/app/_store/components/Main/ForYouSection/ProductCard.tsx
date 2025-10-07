@@ -12,6 +12,7 @@ type Props = {
   };
   toWish?: () => void;
   onSale?: boolean;
+  grid?: boolean;
 };
 
 export const ProductCard = ({
@@ -23,12 +24,15 @@ export const ProductCard = ({
   rating,
   toWish,
   onSale,
+  grid,
 }: Props) => {
   const percent = Math.floor((soldQuantity / totalQuantity) * 100);
   const percentString = `${percent}%`;
 
   return (
-    <div className="w-60 flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105">
+    <div
+      className={`cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105 ${grid ? "w-60 flex-shrink-0" : "w-full"}`}
+    >
       {/* Image + Favorite Button */}
       <div className="relative bg-black/10 p-4">
         <img
@@ -70,11 +74,11 @@ export const ProductCard = ({
           )}
           <div className="flex items-center gap-1">
             <strong className="font-semibold text-gray-800">
-              R${price.toFixed(2)}
+              R${onSale ? (price - price / 2).toFixed(2) : price.toFixed(2)}
             </strong>
             {onSale && (
               <span className="text-sm text-red-500 line-through">
-                R${(price - price / 2).toFixed(2)}
+                R${price.toFixed(2)}
               </span>
             )}
           </div>
