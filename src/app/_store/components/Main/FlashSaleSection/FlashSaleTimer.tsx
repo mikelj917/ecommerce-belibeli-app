@@ -5,7 +5,6 @@ import { FlashSaleDigit } from "./FlashSaleDigit";
 
 export const FlashSaleTimer = ({ endDate }: { endDate: string }) => {
   const [timer, setTimer] = useState({
-    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -20,7 +19,6 @@ export const FlashSaleTimer = ({ endDate }: { endDate: string }) => {
       const diff = formatedDate - actualDate;
 
       setTimer({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((diff % (1000 * 60)) / 1000),
@@ -28,7 +26,7 @@ export const FlashSaleTimer = ({ endDate }: { endDate: string }) => {
 
       if (diff <= 0) {
         clearInterval(interval);
-        setTimer({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setTimer({ hours: 0, minutes: 0, seconds: 0 });
         return;
       }
     }, 1000);
@@ -38,7 +36,6 @@ export const FlashSaleTimer = ({ endDate }: { endDate: string }) => {
 
   return (
     <div className="flex items-center gap-1">
-      <FlashSaleDigit digit={timer.days} separator={true} />
       <FlashSaleDigit digit={timer.hours} separator={true} />
       <FlashSaleDigit digit={timer.minutes} separator={true} />
       <FlashSaleDigit digit={timer.seconds} separator={false} />

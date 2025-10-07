@@ -15,3 +15,4 @@ export * from "./DocumentText";
 export * from "./ArrowUturnLeft";
 export * from "./CreditCard";
 export * from "./ShoppingCart";
+export * from "./Star";
