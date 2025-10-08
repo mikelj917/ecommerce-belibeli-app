@@ -24,11 +24,11 @@ export const NavBar = () => {
         <div className="flex items-center gap-2 lg:gap-4">
           {headerActionIcons.map((action) => {
             return (
-              <div className={`flex items-center gap-0.5 ${action.className}`}>
-                <IconMobileButton
-                  key={action.key}
-                  onClick={() => handleActionClick(action.key)}
-                >
+              <div
+                key={action.key}
+                className={`flex items-center gap-0.5 ${action.className}`}
+              >
+                <IconMobileButton onClick={() => handleActionClick(action.key)}>
                   {action.icon}
                 </IconMobileButton>
                 {action.key === "Heart" && (
