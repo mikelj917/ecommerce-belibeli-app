@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Gravitas_One } from "next/font/google";
 import { SideMenuProvider } from "./_store/contexts/SideMenuMobile";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
+import { WishlistCountProvider } from "./_store/contexts/WishlistCount";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,9 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${gravitasOne.variable} antialiased`}
         >
-          <QueryProvider>{children}</QueryProvider>
+          <WishlistCountProvider>
+            <QueryProvider>{children}</QueryProvider>
+          </WishlistCountProvider>
         </body>
       </SideMenuProvider>
     </html>

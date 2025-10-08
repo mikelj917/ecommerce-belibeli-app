@@ -1,11 +1,11 @@
 "use client";
-
 import { SearchInput } from "./SearchInput";
 import { headerActionIcons } from "./MenuItems";
 import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
 import { SideMenu } from "./SideMenu/SideMenu";
 import { useSideMenu } from "@/app/_store/contexts/SideMenuMobile";
+import { useWishlistCount } from "@/app/_store/contexts/WishlistCount";
 
 export const NavBar = () => {
   const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();
@@ -14,28 +14,30 @@ export const NavBar = () => {
     key === "Menu" ? setIsSideMenuMobOpen(true) : undefined;
   };
 
+  const { wishlistcount } = useWishlistCount();
+
   return (
     <nav className="flex gap-3 lg:gap-17">
       <HeaderLogo />
       <div className="flex w-full items-center gap-3 lg:gap-6">
         <SearchInput />
-        <div className="flex gap-4">
-          {headerActionIcons.map((icon) => {
-            let visibilityClass = "";
-
-            if (icon.key === "Menu") {
-              visibilityClass = "lg:hidden";
-            } else if (icon.key === "Profile") {
-              visibilityClass = "hidden lg:inline-block"
-            }
+        <div className="flex items-center gap-2 lg:gap-4">
+          {headerActionIcons.map((action) => {
             return (
-              <IconMobileButton
-                key={icon.key}
-                onClick={() => handleActionClick(icon.key)}
-                className={visibilityClass}
-              >
-                {icon.icon}
-              </IconMobileButton>
+              <div className={`flex items-center gap-0.5 ${action.className}`}>
+                <IconMobileButton
+                  key={action.key}
+                  onClick={() => handleActionClick(action.key)}
+                >
+                  {action.icon}
+                </IconMobileButton>
+                {action.key === "Heart" && (
+                  <span className="text-sm font-bold">{wishlistcount}</span>
+                )}
+                {action.key === "Cart" && (
+                  <span className="text-sm font-bold">{0}</span>
+                )}
+              </div>
             );
           })}
         </div>

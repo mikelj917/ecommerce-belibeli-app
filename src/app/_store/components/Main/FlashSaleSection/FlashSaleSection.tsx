@@ -75,7 +75,6 @@ export const FlashSaleSection = () => {
                 rating={product.rating}
                 isWished={product.isWished}
                 onSale={true}
-                grid={true}
               />
             ))}
           </div>

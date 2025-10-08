@@ -1,3 +1,4 @@
+import { getWishlistIDs } from "@/shared/services/wishListStorage";
 import {
   BoltIcon,
   BagIcon,
@@ -28,10 +29,12 @@ export const headerActionIcons = [
   {
     icon: <MenuIcon className="cursor-pointer fill-current stroke-none" />,
     key: "Menu",
+    className: "flex lg:hidden"
   },
   {
     icon: <ProfileIcon className="cursor-pointer fill-none stroke-current" />,
     key: "Profile",
+    className: "hidden lg:flex"
   },
 ];
 

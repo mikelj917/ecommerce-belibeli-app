@@ -11,7 +11,7 @@ export const ForYouSection = () => {
     <section id="forYouSection" className="px-3 py-12">
       <div className="mx-auto lg:container">
         <h1 className="text-center text-xl font-bold">Para você!</h1>
-        <section className="grid items-center justify-center gap-6 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <section className="grid grid-cols-2 items-center justify-center gap-6 py-10 md:grid-cols-3 lg:grid-cols-4">
           {mainProducts?.map((product) => (
             <ProductCard
               key={product.id}
@@ -24,6 +24,7 @@ export const ForYouSection = () => {
               rating={product.rating}
               isWished={product.isWished}
               onSale={false}
+              grid={true}
             />
           ))}
         </section>

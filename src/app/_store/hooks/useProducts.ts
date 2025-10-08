@@ -22,12 +22,11 @@ export const useProducts = () => {
     staleTime: 1000 * 60 * 10,
     gcTime: 1000 * 60 * 60,
     select: (products: Product[]): ProductWithSales[] => {
-      const total = Math.floor(Math.random() * (300 - 20) + 20);
-      const sold = Math.floor(Math.random() * total);
-
       const wishListIDs = getWishlistIDs();
 
       return products.map((product) => {
+        const total = Math.floor(Math.random() * (300 - 20) + 20);
+        const sold = Math.floor(Math.random() * total);
         const isWished = wishListIDs.includes(product.id);
         return {
           ...product,

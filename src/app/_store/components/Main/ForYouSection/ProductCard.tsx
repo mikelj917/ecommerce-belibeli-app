@@ -1,6 +1,10 @@
-"use client"
+"use client";
+import { useWishlistCount } from "@/app/_store/contexts/WishlistCount";
 import { HeartIcon, StarIcon } from "@/assets/Icons";
-import { toggleWishlistItem } from "@/shared/services/wishListStorage";
+import {
+  getWishlistIDs,
+  toggleWishlistItem,
+} from "@/shared/services/wishListStorage";
 import { useState } from "react";
 
 type Props = {
@@ -31,20 +35,22 @@ export const ProductCard = ({
   isWished,
   grid,
 }: Props) => {
+  const { setWishlistCount } = useWishlistCount();
+
   const percent = Math.floor((soldQuantity / totalQuantity) * 100);
   const percentString = `${percent}%`;
 
-  const [isWishedState, setIsWishedState] = useState(isWished)
+  const [isWishedState, setIsWishedState] = useState(isWished);
 
   const handleWishlistToggle = () => {
-    setIsWishedState(prev => !prev)
-    
-    toggleWishlistItem(id)
-  }
+    setIsWishedState((prev) => !prev);
+    toggleWishlistItem(id);
+    setWishlistCount(getWishlistIDs().length);
+  };
 
   return (
     <div
-      className={`cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105 ${grid ? "w-60 flex-shrink-0" : "w-full"}`}
+      className={`cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105 ${grid ? "w-full" : "w-60 flex-shrink-0"}`}
     >
       {/* Image + Wish Button */}
       <div className="relative bg-black/10 p-4">
