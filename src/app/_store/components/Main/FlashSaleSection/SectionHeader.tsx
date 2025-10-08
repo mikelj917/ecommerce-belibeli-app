@@ -8,7 +8,7 @@ export const SectionHeader = () => {
       <h1 className="mr-2 text-lg font-bold">Ofertas Relâmpago</h1>
 
       {/* Passe uma data em formato UTC, ex:2026-10-27T10:00:00Z */}
-      <FlashSaleTimer endDate="2025-10-08T10:00:00Z" />
+      <FlashSaleTimer endDate="2030-10-08T10:00:00Z" />
     </header>
   );
 };

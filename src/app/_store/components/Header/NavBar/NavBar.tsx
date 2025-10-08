@@ -10,6 +10,10 @@ import { useSideMenu } from "@/app/_store/contexts/SideMenuMobile";
 export const NavBar = () => {
   const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();
 
+  const handleActionClick = (key: string) => {
+    key === "Menu" ? setIsSideMenuMobOpen(true) : undefined;
+  };
+
   return (
     <nav className="flex gap-3 lg:gap-17">
       <HeaderLogo />
@@ -17,15 +21,21 @@ export const NavBar = () => {
         <SearchInput />
         <div className="flex gap-4">
           {headerActionIcons.map((icon) => {
-            return icon.key === "Menu" ? (
+            let visibilityClass = "";
+
+            if (icon.key === "Menu") {
+              visibilityClass = "lg:hidden";
+            } else if (icon.key === "Profile") {
+              visibilityClass = "hidden lg:inline-block"
+            }
+            return (
               <IconMobileButton
                 key={icon.key}
-                onClick={() => setIsSideMenuMobOpen(true)}
+                onClick={() => handleActionClick(icon.key)}
+                className={visibilityClass}
               >
                 {icon.icon}
               </IconMobileButton>
-            ) : (
-              <IconMobileButton key={icon.key}>{icon.icon}</IconMobileButton>
             );
           })}
         </div>

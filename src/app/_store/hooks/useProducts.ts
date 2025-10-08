@@ -1,5 +1,5 @@
-"use client";
 import { fakeStoreAPI } from "@/shared/services/fakeStoreAPI";
+import { getWishlistIDs } from "@/shared/services/wishListStorage";
 import type { Product } from "@/shared/types/Product";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 type ProductWithSales = Product & {
   totalQuantity: number;
   soldQuantity: number;
+  isWished: boolean;
 };
 
 const fetchProducts = async (): Promise<Product[]> => {
@@ -21,13 +22,18 @@ export const useProducts = () => {
     staleTime: 1000 * 60 * 10,
     gcTime: 1000 * 60 * 60,
     select: (products: Product[]): ProductWithSales[] => {
+      const total = Math.floor(Math.random() * (300 - 20) + 20);
+      const sold = Math.floor(Math.random() * total);
+
+      const wishListIDs = getWishlistIDs();
+
       return products.map((product) => {
-        const total = Math.floor(Math.random() * (300 - 20) + 20);
-        const sold = Math.floor(Math.random() * total);
+        const isWished = wishListIDs.includes(product.id);
         return {
           ...product,
           totalQuantity: total,
           soldQuantity: sold,
+          isWished: isWished,
         };
       });
     },

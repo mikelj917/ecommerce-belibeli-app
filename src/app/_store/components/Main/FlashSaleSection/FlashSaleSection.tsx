@@ -10,8 +10,10 @@ export const FlashSaleSection = () => {
   const [scrollOffset, setScrollOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  if (!products) return;
-  const totalContentWidth = products?.length * 256;
+  const productsOnSale = products?.filter((product) => product.id < 13);
+
+  if (!productsOnSale) return;
+  const totalContentWidth = productsOnSale.length * 256;
 
   const maxScroll =
     totalContentWidth - (containerRef.current?.offsetWidth || 0);
@@ -61,15 +63,17 @@ export const FlashSaleSection = () => {
               transform: `translateX(-${scrollOffset}px)`,
             }}
           >
-            {products?.map((product) => (
+            {productsOnSale.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 imageURL={product.image}
                 price={product.price}
                 title={product.title}
                 totalQuantity={product.totalQuantity}
                 soldQuantity={product.soldQuantity}
                 rating={product.rating}
+                isWished={product.isWished}
                 onSale={true}
                 grid={true}
               />

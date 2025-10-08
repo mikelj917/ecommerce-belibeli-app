@@ -1,6 +1,10 @@
+"use client"
 import { HeartIcon, StarIcon } from "@/assets/Icons";
+import { toggleWishlistItem } from "@/shared/services/wishListStorage";
+import { useState } from "react";
 
 type Props = {
+  id: number;
   title: string;
   price: number;
   imageURL: string;
@@ -10,30 +14,39 @@ type Props = {
     rate: number;
     count: number;
   };
-  toWish?: () => void;
-  onSale?: boolean;
+  isWished: boolean;
+  onSale: boolean;
   grid?: boolean;
 };
 
 export const ProductCard = ({
+  id,
   title,
   price,
   imageURL,
   totalQuantity,
   soldQuantity,
   rating,
-  toWish,
   onSale,
+  isWished,
   grid,
 }: Props) => {
   const percent = Math.floor((soldQuantity / totalQuantity) * 100);
   const percentString = `${percent}%`;
 
+  const [isWishedState, setIsWishedState] = useState(isWished)
+
+  const handleWishlistToggle = () => {
+    setIsWishedState(prev => !prev)
+    
+    toggleWishlistItem(id)
+  }
+
   return (
     <div
       className={`cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105 ${grid ? "w-60 flex-shrink-0" : "w-full"}`}
     >
-      {/* Image + Favorite Button */}
+      {/* Image + Wish Button */}
       <div className="relative bg-black/10 p-4">
         <img
           src={imageURL}
@@ -41,11 +54,13 @@ export const ProductCard = ({
           className="aspect-square w-full object-contain"
         />
         <button
-          onClick={toWish}
-          className="absolute top-2 right-2 cursor-pointer rounded-full bg-white p-1 shadow-md transition hover:scale-110"
+          onClick={handleWishlistToggle}
+          className={`absolute top-2 right-2 cursor-pointer rounded-full bg-white p-1 shadow-md transition duration-150 hover:scale-110 active:scale-140`}
           aria-label="Add to favorites"
         >
-          <HeartIcon className="h-4 w-4 fill-gray-500 text-gray-500" />
+          <HeartIcon
+            className={`h-4 w-4 ${isWishedState ? "fill-red-500 text-red-500" : "fill-gray-500 text-gray-500"}`}
+          />
         </button>
       </div>
 
