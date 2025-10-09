@@ -1,10 +1,18 @@
 "use client";
 import { getWishlistIDs } from "@/shared/services/wishListStorage";
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
 type WishlistCountContextType = {
   wishlistcount: number;
-  setWishlistCount: (wishlistCount: number | ((prev: number) => number)) => void;
+  setWishlistCount: (
+    wishlistCount: number | ((prev: number) => number),
+  ) => void;
 };
 
 const WishlistCountContext = createContext<
@@ -16,7 +24,11 @@ export const WishlistCountProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [wishlistcount, setWishlistCount] = useState(getWishlistIDs().length);
+  const [wishlistcount, setWishlistCount] = useState(0);
+
+  useEffect(() => {
+    setWishlistCount(getWishlistIDs().length);
+  }, []);
 
   return (
     <WishlistCountContext.Provider value={{ wishlistcount, setWishlistCount }}>
