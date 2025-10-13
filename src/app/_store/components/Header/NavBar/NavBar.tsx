@@ -17,7 +17,7 @@ export const NavBar = () => {
   const { wishlistcount } = useWishlistCount();
 
   return (
-    <nav className="flex gap-3 lg:gap-17">
+    <nav className="flex gap-3 lg:gap-6">
       <HeaderLogo />
       <div className="flex w-full items-center gap-3 lg:gap-6">
         <SearchInput />

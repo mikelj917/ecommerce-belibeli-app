@@ -3,7 +3,7 @@ import { getWishlistIDs } from "@/shared/services/wishListStorage";
 import type { Product } from "@/shared/types/Product";
 import { useQuery } from "@tanstack/react-query";
 
-// novo tipo para o produto com as vendas
+// novo tipo para o produto com as novas propriedades
 type ProductWithSales = Product & {
   totalQuantity: number;
   soldQuantity: number;

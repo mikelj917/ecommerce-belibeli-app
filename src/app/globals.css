@@ -11,6 +11,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-gravitas: var(--font-gravitas-one);
+  --font-kotta: var(--font-kotta-one);
 }
 
 body {
@@ -21,4 +22,9 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+:target {
+  /* Seleciona o elemento quando ele é o destino de um link de âncora */
+  scroll-margin-top: 70px; /* Use a altura do seu header fixo */
 }

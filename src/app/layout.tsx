@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Gravitas_One } from "next/font/google";
+import { Geist, Geist_Mono, Gravitas_One, Kotta_One } from "next/font/google";
 import { SideMenuProvider } from "./_store/contexts/SideMenuMobile";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { WishlistCountProvider } from "./_store/contexts/WishlistCount";
@@ -12,6 +12,12 @@ const geistSans = Geist({
 
 const gravitasOne = Gravitas_One({
   variable: "--font-gravitas-one",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const kottaOne = Kotta_One({
+  variable: "--font-kotta-one",
   subsets: ["latin"],
   weight: "400",
 });
@@ -37,7 +43,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <SideMenuProvider>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${gravitasOne.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} ${gravitasOne.variable} ${kottaOne.variable} antialiased`}
         >
           <WishlistCountProvider>
             <QueryProvider>{children}</QueryProvider>
