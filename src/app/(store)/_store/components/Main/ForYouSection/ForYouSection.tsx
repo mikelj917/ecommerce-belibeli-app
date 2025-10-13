@@ -1,5 +1,5 @@
 "use client";
-import { useProducts } from "@/app/_store/hooks/useProducts";
+import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
 import { ProductCard } from "./ProductCard";
 import { ProductCardSkeleton } from "./ProductCardSkeleton";
 

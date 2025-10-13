@@ -4,8 +4,8 @@ import { headerActionIcons } from "./MenuItems";
 import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
 import { SideMenu } from "./SideMenu/SideMenu";
-import { useSideMenu } from "@/app/_store/contexts/SideMenuMobile";
-import { useWishlistCount } from "@/app/_store/contexts/WishlistCount";
+import { useSideMenu } from "@/app/(store)/_store/contexts/SideMenuMobile";
+import { useWishlistCount } from "@/app/(store)/_store/contexts/WishlistCount";
 
 export const NavBar = () => {
   const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();

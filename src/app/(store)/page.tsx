@@ -1,4 +1,4 @@
-import { StorePage } from "@/app/_store/components/StorePage";
+import { StorePage } from "./_store/components/StorePage";
 
 const Home = () => {
   return <StorePage />;

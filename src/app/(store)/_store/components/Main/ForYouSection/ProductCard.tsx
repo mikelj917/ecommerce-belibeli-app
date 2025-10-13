@@ -1,5 +1,5 @@
 "use client";
-import { useWishlistCount } from "@/app/_store/contexts/WishlistCount";
+import { useWishlistCount } from "@/app/(store)/_store/contexts/WishlistCount";
 import { HeartIcon, StarIcon } from "@/assets/Icons";
 import {
   getWishlistIDs,

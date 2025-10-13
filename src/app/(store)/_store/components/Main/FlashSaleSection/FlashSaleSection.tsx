@@ -1,5 +1,5 @@
 "use client";
-import { useProducts } from "@/app/_store/hooks/useProducts";
+import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
 import { SectionHeader } from "./SectionHeader";
 import { ProductCard } from "../ForYouSection/ProductCard";
 import { ArrowLongLeft, ArrowLongRight } from "@/assets/Icons";
