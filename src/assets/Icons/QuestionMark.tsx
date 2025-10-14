@@ -9,7 +9,7 @@ export const QuestionMarkIcon: FC<SVGProps<SVGSVGElement>> = ({
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`size-7 ${className}`}
+    className={`${className}`}
   >
     <path
       strokeLinecap="round"

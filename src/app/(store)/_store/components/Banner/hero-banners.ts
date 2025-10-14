@@ -1,9 +1,9 @@
-import BannerAerofitDesk from "@/assets/banners/banner-aerofit-desk.webp";
-import BannerAerofitMob from "@/assets/banners/banner-aerofit-mob.webp";
-import BannerEssentialDesk from "@/assets/banners/banner-essential-desk.webp";
-import BannerEssentialMob from "@/assets/banners/banner-essential-mob.webp";
-import BannerOversizedDesk from "@/assets/banners/banner-oversized-desk.webp";
-import BannerOversizedMob from "@/assets/banners/banner-oversized-mob.webp";
+import BannerAerofitDesk from "@/assets/images/banners/banner-aerofit-desk.webp";
+import BannerAerofitMob from "@/assets/images/banners/banner-aerofit-mob.webp";
+import BannerEssentialDesk from "@/assets/images/banners/banner-essential-desk.webp";
+import BannerEssentialMob from "@/assets/images/banners/banner-essential-mob.webp";
+import BannerOversizedDesk from "@/assets/images/banners/banner-oversized-desk.webp";
+import BannerOversizedMob from "@/assets/images/banners/banner-oversized-mob.webp";
 
 export const heroBanners = [
   {

@@ -7,7 +7,7 @@ export const DownloadIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`size-7 ${className}`}
+    className={`${className}`}
   >
     <path
       strokeLinecap="round"

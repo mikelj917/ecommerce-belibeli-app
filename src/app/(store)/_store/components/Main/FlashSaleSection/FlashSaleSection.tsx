@@ -2,7 +2,7 @@
 import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
 import { SectionHeader } from "./SectionHeader";
 import { ProductCard } from "../../../../_components/ProductCard";
-import { ArrowLongLeft, ArrowLongRight } from "@/assets/Icons";
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@/assets/Icons";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ProductCardSkeleton } from "../../../../_components/ProductCardSkeleton";
 
@@ -62,14 +62,14 @@ export const FlashSaleSection = () => {
               disabled={!canGoPrev || isLoading}
               className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white disabled:opacity-50"
             >
-              {<ArrowLongLeft />}
+              {<ArrowLongLeftIcon />}
             </button>
             <button
               onClick={handleNext}
               disabled={!canGoNext || isLoading}
               className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white disabled:opacity-50"
             >
-              {<ArrowLongRight />}
+              {<ArrowLongRightIcon />}
             </button>
           </div>
         </div>

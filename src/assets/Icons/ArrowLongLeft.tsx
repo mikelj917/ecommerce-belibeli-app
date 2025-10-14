@@ -1,13 +1,13 @@
 import type { FC, SVGProps } from "react";
 
-export const ArrowLongLeft: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
+export const ArrowLongLeftIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`size-7 ${className}`}
+    className={`${className}`}
   >
     <path
       strokeLinecap="round"

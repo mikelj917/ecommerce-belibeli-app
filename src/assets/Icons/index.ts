@@ -18,3 +18,7 @@ export * from "./ShoppingCart";
 export * from "./Star";
 export * from "./ArrowLongLeft";
 export * from "./ArrowLongRight";
+export * from "./LockClosed";
+export * from "./Envelope";
+export * from "./Eye";
+export * from "./EyeSlash";

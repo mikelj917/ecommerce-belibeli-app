@@ -8,10 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Step1Identification } from "./Step1Identification";
 import { Step2Security } from "./Step2Security";
-import { ChevronLeft } from "@/assets/Icons";
+import { ChevronLeftIcon } from "@/assets/Icons";
 import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Image from "next/image";
+import { LockClosedIcon } from "@/assets/Icons/LockClosed";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -62,9 +63,15 @@ export const RegisterForm = () => {
 
   return (
     <div className="flex w-full flex-col items-center gap-3">
-      <h1 className="mt-5 text-center text-2xl font-bold">
-        Crie a sua conta BeliBeli
-      </h1>
+      <div>
+        <h1 className="mt-5 text-center text-2xl font-bold">
+          Crie a sua conta BeliBeli
+        </h1>
+        <p className="flex justify-center text-sm text-green-500">
+          <span>{<LockClosedIcon className="size-5" />}</span>Seus dados estão
+          protegidos.
+        </p>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full flex-col gap-4"
@@ -74,7 +81,7 @@ export const RegisterForm = () => {
             onClick={handlePreviousStep}
             className="absolute top-6 left-3 rounded-full border p-1 active:bg-black/20 lg:hidden"
           >
-            {<ChevronLeft />}
+            {<ChevronLeftIcon className="size-7" />}
           </button>
         )}
 

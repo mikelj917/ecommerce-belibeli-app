@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "@/assets/Icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/assets/Icons";
 
 type Props = {
   direction: string;
@@ -13,7 +13,11 @@ export const CarouselButton = ({ direction, onClick }: Props) => {
       }`}
       onClick={onClick}
     >
-      {direction === "prev" ? <ChevronLeft /> : <ChevronRight />}
+      {direction === "prev" ? (
+        <ChevronLeftIcon className="size-7" />
+      ) : (
+        <ChevronRightIcon className="size-7" />
+      )}
     </button>
   );
 };

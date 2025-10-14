@@ -6,7 +6,7 @@ export const BoltIcon: FC<SVGProps<SVGSVGElement>> = ({ className }) => (
     viewBox="0 0 24 24"
     fill="currentColor"
     strokeWidth={1.5}
-    className={`size-7 ${className}`}
+    className={`${className}`}
   >
     <path
       fillRule="evenodd"
