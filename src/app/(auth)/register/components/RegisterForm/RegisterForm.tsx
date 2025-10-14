@@ -1,0 +1,132 @@
+"use client";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import {
+  registerSchema,
+  type RegisterFormData,
+} from "../../schemas/register-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { Step1Identification } from "./Step1Identification";
+import { Step2Security } from "./Step2Security";
+import { ChevronLeft } from "@/assets/Icons";
+import { OrDivider } from "@/app/(auth)/_components/OrDivider";
+import googleGLogo from "@/assets/images/auth-logos/google-G.png";
+import Image from "next/image";
+
+export const RegisterForm = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isloadingNextStep, setIsLoadingNextStep] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const handleNextStep = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    let isValid = false;
+
+    if (currentStep === 0) {
+      isValid = await trigger(["name", "email"]);
+    }
+
+    if (isValid) {
+      setIsLoadingNextStep(true);
+      setTimeout(() => {
+        setCurrentStep(currentStep + 1);
+        setIsLoadingNextStep(false);
+      }, 1000);
+    }
+  };
+
+  const handlePreviousStep = () => setCurrentStep(currentStep - 1);
+
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
+    console.log("Dados Validados (prontos para enviar à API):", data);
+  };
+
+  const StepContent = [
+    <Step1Identification key="step1" register={register} errors={errors} />,
+    <Step2Security key="step2" register={register} errors={errors} />,
+  ];
+
+  return (
+    <div className="flex w-full flex-col items-center gap-3">
+      <h1 className="mt-5 text-center text-2xl font-bold">
+        Crie a sua conta BeliBeli
+      </h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-full flex-col gap-4"
+      >
+        {currentStep === 1 && (
+          <button
+            onClick={handlePreviousStep}
+            className="absolute top-6 left-3 rounded-full border p-1 active:bg-black/20 lg:hidden"
+          >
+            {<ChevronLeft />}
+          </button>
+        )}
+
+        {StepContent[currentStep]}
+
+        {currentStep === 0 ? (
+          <>
+            <button
+              onClick={handleNextStep}
+              className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
+            >
+              {isloadingNextStep ? (
+                <div className="mx-auto h-6 w-6 animate-spin rounded-full border-3 border-t-white border-b-white/20"></div>
+              ) : (
+                "Continuar"
+              )}
+            </button>
+            <p className="text-center text-sm text-black/60">
+              Você já possui uma conta?{" "}
+              <span className="cursor-pointer font-bold text-black underline active:text-black/70">
+                Login
+              </span>
+            </p>
+          </>
+        ) : (
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
+          >
+            {isSubmitting ? "Registrando..." : "Registrar"}
+          </button>
+        )}
+      </form>
+
+      {currentStep === 0 && (
+        <div className="w-full max-w-lg">
+          <OrDivider />
+          <div className="flex flex-col gap-3">
+            <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-black/30 py-2 transition-colors hover:bg-zinc-100 active:bg-black/10">
+              <span className="p-0.1 rounded-full border border-black/20 bg-black/10">
+                <Image
+                  src={googleGLogo}
+                  alt="Entre com o google"
+                  className="h-6 w-6"
+                />
+              </span>
+              <span className="">Entre com o Google</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

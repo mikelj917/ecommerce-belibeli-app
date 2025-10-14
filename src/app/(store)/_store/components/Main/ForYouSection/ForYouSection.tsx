@@ -1,7 +1,7 @@
 "use client";
 import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
-import { ProductCard } from "./ProductCard";
-import { ProductCardSkeleton } from "./ProductCardSkeleton";
+import { ProductCard } from "../../../../_components/ProductCard";
+import { ProductCardSkeleton } from "../../../../_components/ProductCardSkeleton";
 
 export const ForYouSection = () => {
   const { data: products, isLoading } = useProducts();

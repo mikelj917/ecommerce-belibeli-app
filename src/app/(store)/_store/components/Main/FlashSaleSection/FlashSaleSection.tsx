@@ -1,10 +1,10 @@
 "use client";
 import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
 import { SectionHeader } from "./SectionHeader";
-import { ProductCard } from "../ForYouSection/ProductCard";
+import { ProductCard } from "../../../../_components/ProductCard";
 import { ArrowLongLeft, ArrowLongRight } from "@/assets/Icons";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ProductCardSkeleton } from "../ForYouSection/ProductCardSkeleton";
+import { ProductCardSkeleton } from "../../../../_components/ProductCardSkeleton";
 
 const ITEM_WIDTH_PX = 256; // Largura do Card (w-60 = 240px) + Gap (gap-4 = 16px) ou gap-6 = 262px
 
