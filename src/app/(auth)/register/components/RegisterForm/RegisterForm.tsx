@@ -12,6 +12,7 @@ import { ChevronLeftIcon, LockClosedIcon } from "@/assets/Icons";
 import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -102,7 +103,7 @@ export const RegisterForm = () => {
             <p className="text-center text-sm text-black/60">
               Você já possui uma conta?{" "}
               <span className="cursor-pointer font-bold text-black underline active:text-black/70">
-                Login
+                <Link href={"/login"}>Login</Link>
               </span>
             </p>
           </>
@@ -111,7 +112,7 @@ export const RegisterForm = () => {
             <button
               onClick={handlePreviousStep}
               disabled={isSubmitting}
-              className="w-full cursor-pointer rounded-lg border border-black bg-white py-4 font-bold text-black transition-colors hover:bg-zinc-100 active:bg-black/20"
+              className="hidden w-full cursor-pointer rounded-lg border border-black bg-white py-4 font-bold text-black transition-colors hover:bg-zinc-100 active:bg-black/20 lg:inline-block"
             >
               Voltar
             </button>
