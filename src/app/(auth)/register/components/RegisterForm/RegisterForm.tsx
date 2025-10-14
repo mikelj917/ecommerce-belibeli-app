@@ -8,11 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Step1Identification } from "./Step1Identification";
 import { Step2Security } from "./Step2Security";
-import { ChevronLeftIcon } from "@/assets/Icons";
+import { ChevronLeftIcon, LockClosedIcon } from "@/assets/Icons";
 import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Image from "next/image";
-import { LockClosedIcon } from "@/assets/Icons/LockClosed";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -68,8 +67,8 @@ export const RegisterForm = () => {
           Crie a sua conta BeliBeli
         </h1>
         <p className="flex justify-center text-sm text-green-500">
-          <span>{<LockClosedIcon className="size-5" />}</span>Seus dados estão
-          protegidos.
+          <LockClosedIcon className="size-5" />
+          Seus dados estão protegidos.
         </p>
       </div>
       <form
@@ -91,6 +90,7 @@ export const RegisterForm = () => {
           <>
             <button
               onClick={handleNextStep}
+              disabled={isloadingNextStep}
               className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
             >
               {isloadingNextStep ? (
@@ -107,13 +107,22 @@ export const RegisterForm = () => {
             </p>
           </>
         ) : (
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
-          >
-            {isSubmitting ? "Registrando..." : "Registrar"}
-          </button>
+          <div className="mx-auto mt-5 flex w-full max-w-lg gap-4">
+            <button
+              onClick={handlePreviousStep}
+              disabled={isSubmitting}
+              className="w-full cursor-pointer rounded-lg border border-black bg-white py-4 font-bold text-black transition-colors hover:bg-zinc-100 active:bg-black/20"
+            >
+              Voltar
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
+            >
+              {isSubmitting ? "Registrando..." : "Registrar"}
+            </button>
+          </div>
         )}
       </form>
 
@@ -122,14 +131,14 @@ export const RegisterForm = () => {
           <OrDivider />
           <div className="flex flex-col gap-3">
             <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-black/30 py-2 transition-colors hover:bg-zinc-100 active:bg-black/10">
-              <span className="p-0.1 rounded-full border border-black/20 bg-black/10">
+              <span className="flex items-center justify-center rounded-full bg-zinc-100 p-1">
                 <Image
                   src={googleGLogo}
                   alt="Entre com o google"
                   className="h-6 w-6"
                 />
               </span>
-              <span className="">Prosseguir com o Google</span>
+              <span>Prosseguir com o Google</span>
             </button>
           </div>
         </div>
