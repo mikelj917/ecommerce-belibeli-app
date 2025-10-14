@@ -56,7 +56,7 @@ export const RegisterForm = () => {
     console.log("Dados Validados (prontos para enviar à API):", data);
   };
 
-  const StepContent = [
+  const StepFormContent = [
     <Step1Identification key="step1" register={register} errors={errors} />,
     <Step2Security key="step2" register={register} errors={errors} />,
   ];
@@ -85,7 +85,7 @@ export const RegisterForm = () => {
           </button>
         )}
 
-        {StepContent[currentStep]}
+        {StepFormContent[currentStep]}
 
         {currentStep === 0 ? (
           <>
@@ -94,7 +94,7 @@ export const RegisterForm = () => {
               className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
             >
               {isloadingNextStep ? (
-                <div className="mx-auto h-6 w-6 animate-spin rounded-full border-3 border-t-white border-b-white/20"></div>
+                <div className="mx-auto h-6 w-6 animate-spin rounded-full border-3 border-t-white/20 border-r-white/20 border-b-white border-l-white/20"></div>
               ) : (
                 "Continuar"
               )}
@@ -129,7 +129,7 @@ export const RegisterForm = () => {
                   className="h-6 w-6"
                 />
               </span>
-              <span className="">Entre com o Google</span>
+              <span className="">Prosseguir com o Google</span>
             </button>
           </div>
         </div>

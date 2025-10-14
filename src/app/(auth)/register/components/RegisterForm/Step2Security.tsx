@@ -1,6 +1,8 @@
+"use client";
 import { InputForm } from "@/app/(auth)/_components/InputForm";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { RegisterFormData } from "../../schemas/register-schema";
+import { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@/assets/Icons";
 
 type StepProps = {
@@ -9,23 +11,52 @@ type StepProps = {
 };
 
 export const Step2Security = ({ register, errors }: StepProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
+
+  const togglePasswordVisibility = (inputName: string) => {
+    if (inputName === "password") {
+      setIsPasswordVisible((prev) => !prev);
+    } else if (inputName === "confirmPassword") {
+      setIsConfirmPasswordVisible((prev) => !prev);
+    }
+  };
   return (
     <>
       <InputForm
+        isPassword={true}
+        type={isPasswordVisible ? "text" : "password"}
+        icon={
+          isPasswordVisible ? (
+            <EyeIcon className="size-6" />
+          ) : (
+            <EyeSlashIcon className="size-6" />
+          )
+        }
         label="Senha"
         placeholder="Digite a sua senha"
         name="password"
-        icon={<EyeIcon className="size-6" />}
         register={register}
         errors={errors}
+        onTogglePassword={togglePasswordVisibility}
       />
       <InputForm
+        isPassword={true}
+        type={isConfirmPasswordVisible ? "text" : "password"}
+        icon={
+          isConfirmPasswordVisible ? (
+            <EyeIcon className="size-6" />
+          ) : (
+            <EyeSlashIcon className="size-6" />
+          )
+        }
         label="Confirme a senha"
         placeholder="Confirme a sua senha"
         name="confirmPassword"
-        icon={<EyeIcon className="size-6" />}
         register={register}
         errors={errors}
+        onTogglePassword={togglePasswordVisibility}
       />
     </>
   );
