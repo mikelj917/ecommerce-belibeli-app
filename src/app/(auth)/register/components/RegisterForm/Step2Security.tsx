@@ -16,9 +16,9 @@ export const Step2Security = ({ register, errors }: StepProps) => {
     useState(false);
 
   const togglePasswordVisibility = (inputName: string) => {
-    if (inputName === "password") {
+    if (inputName === "password.password") {
       setIsPasswordVisible((prev) => !prev);
-    } else if (inputName === "confirmPassword") {
+    } else if (inputName === "password.confirmPassword") {
       setIsConfirmPasswordVisible((prev) => !prev);
     }
   };
@@ -36,7 +36,7 @@ export const Step2Security = ({ register, errors }: StepProps) => {
         }
         label="Senha"
         placeholder="Digite a sua senha"
-        name="password"
+        name="password.password"
         register={register}
         errors={errors}
         onTogglePassword={togglePasswordVisibility}
@@ -53,7 +53,7 @@ export const Step2Security = ({ register, errors }: StepProps) => {
         }
         label="Confirme a senha"
         placeholder="Confirme a sua senha"
-        name="confirmPassword"
+        name="password.confirmPassword"
         register={register}
         errors={errors}
         onTogglePassword={togglePasswordVisibility}

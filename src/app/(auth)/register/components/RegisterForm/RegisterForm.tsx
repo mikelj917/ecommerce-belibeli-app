@@ -28,8 +28,10 @@ export const RegisterForm = () => {
     defaultValues: {
       name: "",
       email: "",
-      password: "",
-      confirmPassword: "",
+      password: {
+        password: "",
+        confirmPassword: "",
+      },
     },
   });
 
@@ -60,6 +62,7 @@ export const RegisterForm = () => {
     <Step1Identification key="step1" register={register} errors={errors} />,
     <Step2Security key="step2" register={register} errors={errors} />,
   ];
+  console.log(errors.password?.confirmPassword);
 
   return (
     <div className="flex w-full flex-col items-center gap-3">
