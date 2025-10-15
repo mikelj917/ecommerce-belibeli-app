@@ -13,9 +13,13 @@ import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
 import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
+import { useCreateUser } from "../../hooks/user";
+import { generateID } from "@/shared/utils/id/generate-ID";
+import { generateToken } from "@/shared/utils/id/generate-token";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const { mutate,  } = useCreateUser();
 
   const {
     register,
@@ -49,8 +53,15 @@ export const RegisterForm = () => {
 
   const handlePreviousStep = () => setCurrentStep(currentStep - 1);
 
-  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
-    console.log("Dados Validados (prontos para enviar à API):", data);
+  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
+    const id = generateID();
+
+    mutate({
+      ...data,
+      id,
+      password: data.password.password,
+      token: generateToken(id),
+    });
   };
 
   const StepFormContent = [

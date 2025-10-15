@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "backend": "npx json-server --port 4000 db.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
