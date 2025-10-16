@@ -1,6 +1,6 @@
 import { getUsers } from "@/app/(auth)/services/user";
 import type { User } from "@/shared/types/User";
-import type { ErrorBackend } from "./types/error";
+import type { ErrorBackend } from "./types/Error";
 
 export const validateUser = async (
   userData: Pick<User, "email" | "password">,
@@ -8,8 +8,7 @@ export const validateUser = async (
   const usersData: User[] = await getUsers();
 
   const foundUser = usersData.find(
-    (user: User) =>
-      user.email === userData.email && user.password === userData.password,
+    (user: User) => user.email === userData.email && user.password === userData.password,
   );
   if (!foundUser) {
     const error: ErrorBackend = {

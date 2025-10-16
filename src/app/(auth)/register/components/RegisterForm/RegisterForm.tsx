@@ -1,9 +1,6 @@
 "use client";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import {
-  registerSchema,
-  type RegisterFormData,
-} from "../../schemas/register-schema";
+import { registerSchema, type RegisterFormData } from "../../schemas/register-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Step1Identification } from "./Step1Identification";
@@ -76,18 +73,13 @@ export const RegisterForm = () => {
   return (
     <div className="flex w-full flex-col items-center gap-3">
       <div>
-        <h1 className="mt-5 text-center text-2xl font-bold">
-          Crie a sua conta BeliBeli
-        </h1>
+        <h1 className="mt-5 text-center text-2xl font-bold">Crie a sua conta BeliBeli</h1>
         <p className="flex justify-center text-sm text-green-500">
           <LockClosedIcon className="size-5" />
           Seus dados estão protegidos.
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-4">
         {currentStep === 1 && (
           <button
             onClick={handlePreviousStep}
@@ -140,10 +132,7 @@ export const RegisterForm = () => {
         <div className="w-full max-w-lg">
           <OrDivider />
           <div className="flex flex-col gap-3">
-            <SocialLoginButton
-              src={googleGLogo}
-              alt="Prosseguir com o Google"
-            />
+            <SocialLoginButton src={googleGLogo} alt="Prosseguir com o Google" />
           </div>
         </div>
       )}

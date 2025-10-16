@@ -4,17 +4,20 @@ import { loginSchema, type loginFormData } from "../../../schemas/login-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputForm } from "@/app/(auth)/_components/InputForm";
 import { EnvelopeIcon, EyeIcon, EyeSlashIcon } from "@/assets/Icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
-import { loginUser } from "@/app/(auth)/services/user";
+import { getUserToken } from "@/app/(auth)/services/user";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/(auth)/hooks/auth";
 
 export const LoginForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const { login } = useAuth();
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -28,18 +31,30 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<loginFormData> = async (data) => {
-    const response = await loginUser(data);
-    if (typeof response === "object") {
-      setError("email", {
-        message: "Credenciais Inválidas",
-      });
-      setError("password", {
-        message: "Credenciais Inválidas",
-      });
-      return;
+  useEffect(() => {
+    const userToken = getUserToken();
+    if (userToken) {
+      router.push("/");
     }
-    router.push("/");
+  }, []);
+
+  const onSubmit: SubmitHandler<loginFormData> = async (data) => {
+    try {
+      await login(data);
+    } catch (error) {
+      if ((error as any).status === 401 || (error as any).message === "Credenciais inválidas.") {
+        setError("email", {
+          type: "server",
+          message: "Credenciais inválidas.",
+        });
+        setError("password", {
+          type: "server",
+          message: "Credenciais inválidas.",
+        });
+      } else {
+        console.error("Erro inesperado:", error);
+      }
+    }
   };
 
   const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
@@ -51,10 +66,7 @@ export const LoginForm = () => {
           Login
         </h1>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-4">
         <InputForm
           label="Email"
           placeholder="Digite o seu email"
@@ -68,11 +80,7 @@ export const LoginForm = () => {
           isPassword={true}
           type={isPasswordVisible ? "text" : "password"}
           icon={
-            isPasswordVisible ? (
-              <EyeIcon className="size-6" />
-            ) : (
-              <EyeSlashIcon className="size-6" />
-            )
+            isPasswordVisible ? <EyeIcon className="size-6" /> : <EyeSlashIcon className="size-6" />
           }
           label="Senha"
           placeholder="Digite a sua senha"
