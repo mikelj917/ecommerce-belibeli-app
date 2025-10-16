@@ -3,7 +3,7 @@ import { HeaderRegister } from "./components/Header/HeaderRegister";
 
 export default function RegisterPage() {
   return (
-    <div className="w-full p-6">
+    <div className="relative w-full p-6">
       <HeaderRegister />
       <RegisterForm />
     </div>

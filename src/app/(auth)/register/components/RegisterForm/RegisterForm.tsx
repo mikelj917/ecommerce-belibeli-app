@@ -16,10 +16,12 @@ import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
 import { useCreateUser } from "../../hooks/user";
 import { generateID } from "@/shared/utils/id/generate-ID";
 import { generateToken } from "@/shared/utils/id/generate-token";
+import { SucessRegisterModal } from "../SucessRegisterModal/SucessRegisterModal";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const { mutate,  } = useCreateUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { mutate } = useCreateUser();
 
   const {
     register,
@@ -36,7 +38,10 @@ export const RegisterForm = () => {
         confirmPassword: "",
       },
     },
+    mode: "onChange",
   });
+
+  const handlePreviousStep = () => setCurrentStep(currentStep - 1);
 
   const handleNextStep = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -51,17 +56,16 @@ export const RegisterForm = () => {
     }
   };
 
-  const handlePreviousStep = () => setCurrentStep(currentStep - 1);
-
   const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
     const id = generateID();
-
     mutate({
       ...data,
       id,
       password: data.password.password,
       token: generateToken(id),
     });
+
+    setIsModalOpen(true);
   };
 
   const StepFormContent = [
@@ -141,6 +145,12 @@ export const RegisterForm = () => {
               alt="Prosseguir com o Google"
             />
           </div>
+        </div>
+      )}
+
+      {isModalOpen && (
+        <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-black/80 p-2">
+          <SucessRegisterModal />
         </div>
       )}
     </div>

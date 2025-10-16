@@ -22,3 +22,4 @@ export * from "./LockClosed";
 export * from "./Envelope";
 export * from "./Eye";
 export * from "./EyeSlash";
+export * from "./CheckCircle";
