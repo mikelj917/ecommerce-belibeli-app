@@ -9,11 +9,16 @@ import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
+import { loginUser } from "@/app/(auth)/services/user";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
@@ -22,10 +27,19 @@ export const LoginForm = () => {
       password: "",
     },
   });
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit: SubmitHandler<loginFormData> = async (data) => {
-    console.log("Dados Validados (prontos para enviar à API):", data);
+    const response = await loginUser(data);
+    if (typeof response === "object") {
+      setError("email", {
+        message: "Credenciais Inválidas",
+      });
+      setError("password", {
+        message: "Credenciais Inválidas",
+      });
+      return;
+    }
+    router.push("/");
   };
 
   const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
@@ -75,7 +89,7 @@ export const LoginForm = () => {
               Lembrar login
             </label>
           </div>
-          
+
           <span className="cursor-pointer self-end text-sm font-bold text-black underline active:text-black/70">
             <a href={"/register"}>Esqueceu a senha?</a>
           </span>

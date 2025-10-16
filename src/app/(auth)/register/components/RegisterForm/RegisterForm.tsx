@@ -13,7 +13,7 @@ import { OrDivider } from "@/app/(auth)/_components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
 import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
-import { useCreateUser } from "../../hooks/user";
+import { useRegister } from "../../hooks/user";
 import { generateID } from "@/shared/utils/id/generate-ID";
 import { generateToken } from "@/shared/utils/id/generate-token";
 import { SucessRegisterModal } from "../SucessRegisterModal/SucessRegisterModal";
@@ -21,7 +21,7 @@ import { SucessRegisterModal } from "../SucessRegisterModal/SucessRegisterModal"
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate } = useCreateUser();
+  const { mutate } = useRegister();
 
   const {
     register,
@@ -149,7 +149,7 @@ export const RegisterForm = () => {
       )}
 
       {isModalOpen && (
-        <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-black/80 p-2">
+        <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-black/90 p-2">
           <SucessRegisterModal />
         </div>
       )}
