@@ -2,26 +2,23 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { loginSchema, type loginFormData } from "../../../schemas/login-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputForm } from "@/app/(auth)/_components/InputForm";
+import { InputForm } from "@/app/(auth)/components/InputForm";
 import { EnvelopeIcon, EyeIcon, EyeSlashIcon } from "@/assets/Icons";
-import { useEffect, useState } from "react";
-import { OrDivider } from "@/app/(auth)/_components/OrDivider";
-import { SocialLoginButton } from "@/app/(auth)/_components/SocialLoginButton";
+import { useState } from "react";
+import { OrDivider } from "@/app/(auth)/components/OrDivider";
+import { SocialLoginButton } from "@/app/(auth)/components/SocialLoginButton";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
-import { getUserToken } from "@/app/(auth)/services/user";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/(auth)/hooks/auth";
+import { ErrorNotification } from "@/shared/components/ErrorNotification";
+import type { ResponseType } from "@/app/(auth)/hooks/auth";
 
-export const LoginForm = () => {
+export const LoginForm = ({ login }: { login: (data: loginFormData) => Promise<ResponseType> }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const { login } = useAuth();
-  const router = useRouter();
+  const [authError, setAuthError] = useState<string>("");
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
@@ -31,30 +28,13 @@ export const LoginForm = () => {
     },
   });
 
-  useEffect(() => {
-    const userToken = getUserToken();
-    if (userToken) {
-      router.push("/");
-    }
-  }, []);
-
   const onSubmit: SubmitHandler<loginFormData> = async (data) => {
-    try {
-      await login(data);
-    } catch (error) {
-      if ((error as any).status === 401 || (error as any).message === "Credenciais inválidas.") {
-        setError("email", {
-          type: "server",
-          message: "Credenciais inválidas.",
-        });
-        setError("password", {
-          type: "server",
-          message: "Credenciais inválidas.",
-        });
-      } else {
-        console.error("Erro inesperado:", error);
-      }
+    const response = await login(data);
+    if (response.error) {
+      setAuthError(response.error?.message);
+      return;
     }
+    setAuthError("");
   };
 
   const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
@@ -125,6 +105,14 @@ export const LoginForm = () => {
           <SocialLoginButton src={googleGLogo} alt="Prosseguir com o Google" />
         </div>
       </div>
+
+      {authError && (
+        <ErrorNotification
+          title="Erro ao tentar fazer login"
+          message={authError}
+          onClose={() => setAuthError("")}
+        />
+      )}
     </div>
   );
 };

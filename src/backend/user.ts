@@ -1,6 +1,6 @@
-import { getUsers } from "@/app/(auth)/services/user";
 import type { User } from "@/shared/types/User";
 import type { ErrorBackend } from "./types/Error";
+import { getUsers } from "@/app/(auth)/services/user";
 
 export const validateUser = async (
   userData: Pick<User, "email" | "password">,
@@ -12,8 +12,8 @@ export const validateUser = async (
   );
   if (!foundUser) {
     const error: ErrorBackend = {
-      statusCode: 404,
       message: "Credenciais Inválidas",
+      type: "not_found"
     };
     return error;
   }

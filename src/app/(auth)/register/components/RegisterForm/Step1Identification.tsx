@@ -1,4 +1,4 @@
-import { InputForm } from "@/app/(auth)/_components/InputForm";
+import { InputForm } from "@/app/(auth)/components/InputForm";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { RegisterFormData } from "../../schemas/register-schema";
 import { EnvelopeIcon, ProfileIcon } from "@/assets/Icons";

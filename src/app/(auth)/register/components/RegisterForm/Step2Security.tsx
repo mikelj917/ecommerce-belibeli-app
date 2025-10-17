@@ -1,5 +1,5 @@
 "use client";
-import { InputForm } from "@/app/(auth)/_components/InputForm";
+import { InputForm } from "@/app/(auth)/components/InputForm";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { RegisterFormData } from "../../schemas/register-schema";
 import { useState } from "react";
@@ -12,8 +12,7 @@ type StepProps = {
 
 export const Step2Security = ({ register, errors }: StepProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = (inputName: string) => {
     if (inputName === "password.password") {
@@ -28,11 +27,7 @@ export const Step2Security = ({ register, errors }: StepProps) => {
         isPassword={true}
         type={isPasswordVisible ? "text" : "password"}
         icon={
-          isPasswordVisible ? (
-            <EyeIcon className="size-6" />
-          ) : (
-            <EyeSlashIcon className="size-6" />
-          )
+          isPasswordVisible ? <EyeIcon className="size-6" /> : <EyeSlashIcon className="size-6" />
         }
         label="Senha"
         placeholder="Digite a sua senha"

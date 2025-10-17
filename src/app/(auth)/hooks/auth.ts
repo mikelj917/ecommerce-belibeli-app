@@ -1,31 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getUserToken, loginUser } from "../services/user";
 import type { User } from "@/shared/types/User";
 import { useRouter } from "next/navigation";
+import { loginUser } from "../actions/auth";
+import type { ErrorBackend } from "@/backend/types/Error";
+
+export type ResponseType = {
+  success: boolean;
+  token?: string;
+  error?: ErrorBackend;
+};
 
 export const useAuth = () => {
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const token = getUserToken();
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    setIsInitialized(true);
-  }, []);
-
   const handleLogin = async (userData: Pick<User, "email" | "password">) => {
-    try {
-      await loginUser(userData);
-      setIsAuthenticated(true);
-      router.push("/");
-    } catch (error) {
-      throw error;
+    const response: ResponseType = await loginUser(userData);
+    if (!response.success) {
+      return response;
     }
+    router.push("/");
+    return response;
   };
 
-  return { isAuthenticated, isInitialized, login: handleLogin };
+  return { handleLogin };
 };
