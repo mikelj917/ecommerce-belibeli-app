@@ -57,14 +57,14 @@ export const FlashSaleSection = () => {
               disabled={!canGoPrev || isLoading}
               className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white disabled:opacity-50"
             >
-              {<ArrowLongLeftIcon />}
+              {<ArrowLongLeftIcon className="size-8" />}
             </button>
             <button
               onClick={handleNext}
               disabled={!canGoNext || isLoading}
               className="cursor-pointer rounded-md border-1 px-3 transition-colors active:bg-black active:text-white disabled:opacity-50"
             >
-              {<ArrowLongRightIcon />}
+              {<ArrowLongRightIcon className="size-8" />}
             </button>
           </div>
         </div>
