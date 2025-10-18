@@ -1,5 +1,5 @@
 import { fakeStoreAPI } from "@/shared/services/fakeStoreAPI";
-import { getWishlistIDs } from "@/shared/services/wishListStorage";
+import { getWishlistIDs } from "@/app/(store)/services/wishListStorage";
 import type { Product } from "@/shared/types/Product";
 import { useQuery } from "@tanstack/react-query";
 

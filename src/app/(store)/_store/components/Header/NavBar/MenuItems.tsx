@@ -1,4 +1,4 @@
-import { getWishlistIDs } from "@/shared/services/wishListStorage";
+import { getWishlistIDs } from "@/app/(store)/services/wishListStorage";
 import {
   BoltIcon,
   BagIcon,

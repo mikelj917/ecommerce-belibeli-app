@@ -1,7 +1,7 @@
 "use client";
-import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
-import { ProductCard } from "../../../../_components/ProductCard";
-import { ProductCardSkeleton } from "../../../../_components/ProductCardSkeleton";
+import { useProducts } from "@/app/(store)/hooks/useProducts";
+import { ProductCard } from "../../../../components/ProductCard";
+import { ProductCardSkeleton } from "../../../../components/ProductCardSkeleton";
 
 export const ForYouSection = () => {
   const { data: products, isLoading } = useProducts();
@@ -14,9 +14,7 @@ export const ForYouSection = () => {
         <h1 className="text-center text-xl font-bold">Para você!</h1>
         <section className="grid grid-cols-2 items-center justify-center gap-6 py-10 md:grid-cols-3 lg:grid-cols-4">
           {isLoading
-            ? [...Array(9)].map((_, index) => (
-                <ProductCardSkeleton key={index} grid={true} />
-              ))
+            ? [...Array(9)].map((_, index) => <ProductCardSkeleton key={index} grid={true} />)
             : mainProducts?.map((product) => (
                 <ProductCard
                   key={product.id}

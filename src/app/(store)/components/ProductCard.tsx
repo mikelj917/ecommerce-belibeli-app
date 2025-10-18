@@ -1,10 +1,7 @@
 "use client";
-import { useWishlistCount } from "@/app/(store)/_store/contexts/WishlistCount";
+import { useWishlistCount } from "@/app/(store)/contexts/WishlistCount";
 import { HeartIcon, StarIcon } from "@/assets/Icons";
-import {
-  getWishlistIDs,
-  toggleWishlistItem,
-} from "@/shared/services/wishListStorage";
+import { getWishlistIDs, toggleWishlistItem } from "@/app/(store)/services/wishListStorage";
 import { useState } from "react";
 
 type Props = {
@@ -54,11 +51,7 @@ export const ProductCard = ({
     >
       {/* Image + Wish Button */}
       <div className="relative bg-black/10 p-4">
-        <img
-          src={imageURL}
-          alt={title}
-          className="aspect-square w-full object-contain"
-        />
+        <img src={imageURL} alt={title} className="aspect-square w-full object-contain" />
         <button
           onClick={handleWishlistToggle}
           className={`absolute top-2 right-2 cursor-pointer rounded-full bg-white p-1 shadow-md transition duration-150 hover:scale-110 active:scale-140`}
@@ -72,16 +65,12 @@ export const ProductCard = ({
 
       {/* Product Info */}
       <div className="p-2">
-        <h1 className="mb-1 line-clamp-2 h-[35px] text-sm leading-tight font-semibold">
-          {title}
-        </h1>
+        <h1 className="mb-1 line-clamp-2 h-[35px] text-sm leading-tight font-semibold">{title}</h1>
 
         {/* Rating */}
         <div className="mb-1 flex items-center text-xs text-gray-500">
           <StarIcon className="mr-1 h-3 w-3 fill-yellow-400 stroke-yellow-400" />
-          <span className="font-bold text-black">
-            {rating?.rate.toFixed(1) ?? "–"}
-          </span>
+          <span className="font-bold text-black">{rating?.rate.toFixed(1) ?? "–"}</span>
           <span className="mx-1">·</span>
           <span>{rating?.count ? `${soldQuantity} vendidos` : "Novo"}</span>
         </div>
@@ -98,9 +87,7 @@ export const ProductCard = ({
               R${onSale ? (price - price / 2).toFixed(2) : price.toFixed(2)}
             </strong>
             {onSale && (
-              <span className="text-sm text-red-500 line-through">
-                R${price.toFixed(2)}
-              </span>
+              <span className="text-sm text-red-500 line-through">R${price.toFixed(2)}</span>
             )}
           </div>
         </div>

@@ -1,10 +1,10 @@
 "use client";
-import { useProducts } from "@/app/(store)/_store/hooks/useProducts";
+import { useProducts } from "@/app/(store)/hooks/useProducts";
 import { SectionHeader } from "./SectionHeader";
-import { ProductCard } from "../../../../_components/ProductCard";
+import { ProductCard } from "../../../../components/ProductCard";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@/assets/Icons";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ProductCardSkeleton } from "../../../../_components/ProductCardSkeleton";
+import { ProductCardSkeleton } from "../../../../components/ProductCardSkeleton";
 
 const ITEM_WIDTH_PX = 256; // Largura do Card (w-60 = 240px) + Gap (gap-4 = 16px) ou gap-6 = 262px
 
@@ -25,8 +25,7 @@ export const FlashSaleSection = () => {
   const maxScroll = calculateMaxScroll();
 
   useEffect(() => {
-    const handleResize = () =>
-      setScrollOffset((prev) => Math.min(prev, calculateMaxScroll()));
+    const handleResize = () => setScrollOffset((prev) => Math.min(prev, calculateMaxScroll()));
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [calculateMaxScroll]);
@@ -45,11 +44,7 @@ export const FlashSaleSection = () => {
   const canGoPrev = scrollOffset > 0;
 
   if (isError)
-    return (
-      <section className="p-12 text-center text-red-600">
-        Erro ao carregar ofertas.
-      </section>
-    );
+    return <section className="p-12 text-center text-red-600">Erro ao carregar ofertas.</section>;
 
   return (
     <section id="flashSaleSection" className="bg-neutral-100 px-3 py-12">
@@ -73,10 +68,7 @@ export const FlashSaleSection = () => {
             </button>
           </div>
         </div>
-        <section
-          ref={containerRef}
-          className="overflow-x-auto lg:overflow-x-hidden lg:px-1.5"
-        >
+        <section ref={containerRef} className="overflow-x-auto lg:overflow-x-hidden lg:px-1.5">
           <div
             className="flex gap-4 py-10 transition-transform duration-500 ease-in-out"
             style={{
@@ -84,9 +76,7 @@ export const FlashSaleSection = () => {
             }}
           >
             {isLoading
-              ? [...Array(6)].map((_, index) => (
-                  <ProductCardSkeleton key={index} grid={false} />
-                ))
+              ? [...Array(6)].map((_, index) => <ProductCardSkeleton key={index} grid={false} />)
               : productsOnSale?.map((product) => (
                   <ProductCard
                     key={product.id}

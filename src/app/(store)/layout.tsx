@@ -1,12 +1,8 @@
 "use client";
 import { SideMenuProvider } from "./_store/contexts/SideMenuMobile";
-import { WishlistCountProvider } from "./_store/contexts/WishlistCount";
+import { WishlistCountProvider } from "./contexts/WishlistCount";
 
-export default function StoreLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function StoreLayout({ children }: { children: React.ReactNode }) {
   return (
     <SideMenuProvider>
       <WishlistCountProvider>{children}</WishlistCountProvider>

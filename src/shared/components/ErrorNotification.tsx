@@ -14,7 +14,7 @@ type NotificationProps = {
 export const ErrorNotification = ({
   title,
   message,
-  duration = 4000,
+  duration = 3000,
   onClose,
 }: NotificationProps) => {
   const [progress, setProgress] = useState(100);

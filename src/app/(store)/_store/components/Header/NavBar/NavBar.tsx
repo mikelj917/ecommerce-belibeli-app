@@ -5,7 +5,7 @@ import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
 import { SideMenu } from "./SideMenu/SideMenu";
 import { useSideMenu } from "@/app/(store)/_store/contexts/SideMenuMobile";
-import { useWishlistCount } from "@/app/(store)/_store/contexts/WishlistCount";
+import { useWishlistCount } from "@/app/(store)/contexts/WishlistCount";
 
 export const NavBar = () => {
   const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();
@@ -24,19 +24,14 @@ export const NavBar = () => {
         <div className="flex items-center gap-2 lg:gap-4">
           {headerActionIcons.map((action) => {
             return (
-              <div
-                key={action.key}
-                className={`flex items-center gap-0.5 ${action.className}`}
-              >
+              <div key={action.key} className={`flex items-center gap-0.5 ${action.className}`}>
                 <IconMobileButton onClick={() => handleActionClick(action.key)}>
                   {action.icon}
                 </IconMobileButton>
                 {action.key === "Heart" && (
                   <span className="text-sm font-bold">{wishlistcount}</span>
                 )}
-                {action.key === "Cart" && (
-                  <span className="text-sm font-bold">{0}</span>
-                )}
+                {action.key === "Cart" && <span className="text-sm font-bold">{0}</span>}
               </div>
             );
           })}
@@ -44,13 +39,9 @@ export const NavBar = () => {
         <SideMenu
           onClose={() => setIsSideMenuMobOpen(false)}
           backgroundClassName={
-            isSideMenuMobOpen
-              ? "opacity-100 bg-black/70"
-              : "opacity-0 pointer-events-none"
+            isSideMenuMobOpen ? "opacity-100 bg-black/70" : "opacity-0 pointer-events-none"
           }
-          sideMenuClassName={
-            isSideMenuMobOpen ? "translate-x-0" : "translate-x-full"
-          }
+          sideMenuClassName={isSideMenuMobOpen ? "translate-x-0" : "translate-x-full"}
         />
       </div>
     </nav>
