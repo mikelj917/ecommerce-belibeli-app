@@ -1,6 +1,6 @@
 "use client";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { registerSchema, type RegisterFormData } from "../../schemas/register-schema";
+import { registerSchema, type RegisterFormData } from "../../schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Step1Identification } from "./Step1Identification";
@@ -10,14 +10,14 @@ import { OrDivider } from "@/app/(auth)/components/OrDivider";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
 import { SocialLoginButton } from "@/app/(auth)/components/SocialLoginButton";
-import { useRegister } from "../../hooks/user";
-import { generateID } from "@/shared/utils/id/generate-ID";
-import { generateToken } from "@/shared/utils/id/generate-token";
 import { SucessRegisterModal } from "../SucessRegisterModal/SucessRegisterModal";
+import { ErrorNotification } from "@/shared/components/ErrorNotification";
+import { useRegister } from "../../hooks/useRegister";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [authError, setAuthError] = useState<string>("");
   const { mutate } = useRegister();
 
   const {
@@ -54,15 +54,22 @@ export const RegisterForm = () => {
   };
 
   const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
-    const id = generateID();
-    mutate({
-      ...data,
-      id,
-      password: data.password.password,
-      token: generateToken(id),
-    });
-
-    setIsModalOpen(true);
+    mutate(
+      {
+        ...data,
+        password: data.password.password,
+        confirm_password: data.password.confirmPassword,
+      },
+      {
+        onSuccess: () => {
+          setIsModalOpen(true);
+        },
+        onError: (error) => {
+          const data = error.response?.data as { message: string };
+          setAuthError(data.message);
+        },
+      },
+    );
   };
 
   const StepFormContent = [
@@ -119,7 +126,7 @@ export const RegisterForm = () => {
 
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !!authError}
               className="w-full cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
             >
               {isSubmitting ? "Registrando..." : "Registrar"}
@@ -141,6 +148,14 @@ export const RegisterForm = () => {
         <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-black/90 p-2">
           <SucessRegisterModal />
         </div>
+      )}
+
+      {authError && (
+        <ErrorNotification
+          title="Erro ao tentar criar a sua conta"
+          message={authError}
+          onClose={() => setAuthError("")}
+        />
       )}
     </div>
   );

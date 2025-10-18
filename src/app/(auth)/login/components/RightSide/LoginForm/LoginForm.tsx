@@ -10,11 +10,12 @@ import { SocialLoginButton } from "@/app/(auth)/components/SocialLoginButton";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
 import { ErrorNotification } from "@/shared/components/ErrorNotification";
-import type { ResponseType } from "@/app/(auth)/hooks/auth";
+import { useLogin } from "../../../hooks/useLogin";
 
-export const LoginForm = ({ login }: { login: (data: loginFormData) => Promise<ResponseType> }) => {
+export const LoginForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [authError, setAuthError] = useState<string>("");
+  const { mutate } = useLogin();
 
   const {
     register,
@@ -29,12 +30,12 @@ export const LoginForm = ({ login }: { login: (data: loginFormData) => Promise<R
   });
 
   const onSubmit: SubmitHandler<loginFormData> = async (data) => {
-    const response = await login(data);
-    if (response.error) {
-      setAuthError(response.error?.message);
-      return;
-    }
-    setAuthError("");
+    mutate(data, {
+      onError: (error) => {
+        const data = error.response?.data as { message: string };
+        setAuthError(data.message);
+      },
+    });
   };
 
   const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
@@ -85,7 +86,7 @@ export const LoginForm = ({ login }: { login: (data: loginFormData) => Promise<R
 
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !!authError}
           className="mx-auto mt-5 w-full max-w-lg cursor-pointer rounded-lg bg-black py-4 font-bold text-white transition-colors hover:bg-black/80 active:bg-black/60"
         >
           {isSubmitting ? "Entrando..." : "Entrar"}
