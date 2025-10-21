@@ -7,6 +7,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
     price: 109.95,
+    promotionPrice: 89.95,
+    promotionEnd: new Date("2030-10-25"),
     description: "Your perfect pack for everyday use and walks in the forest...",
     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
     ratingRate: 3.9,
@@ -25,6 +27,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "Mens Cotton Jacket",
     price: 55.99,
+    promotionPrice: 45.99,
+    promotionEnd: new Date("2030-10-24"),
     description: "Great outerwear jackets for Spring/Autumn/Winter...",
     image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
     ratingRate: 4.7,
@@ -43,6 +47,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
     price: 695,
+    promotionPrice: 549,
+    promotionEnd: new Date("2030-10-30"),
     description:
       "From our Legends Collection, the Naga was inspired by the mythical water dragon...",
     image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png",
@@ -62,6 +68,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "White Gold Plated Princess",
     price: 9.99,
+    promotionPrice: 7.99,
+    promotionEnd: new Date("2030-10-23"),
     description: "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her...",
     image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png",
     ratingRate: 3.0,
@@ -80,6 +88,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "WD 2TB Elements Portable External Hard Drive - USB 3.0",
     price: 64,
+    promotionPrice: 54.9,
+    promotionEnd: new Date("2030-11-10"),
     description: "USB 3.0 and USB 2.0 Compatibility Fast data transfers...",
     image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_t.png",
     ratingRate: 3.3,
@@ -98,6 +108,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
     price: 109,
+    promotionPrice: 89,
+    promotionEnd: new Date("2030-10-22"),
     description: "3D NAND flash are applied to deliver high transfer speeds...",
     image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png",
     ratingRate: 4.8,
@@ -116,6 +128,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
     price: 599,
+    promotionPrice: 499,
+    promotionEnd: new Date("2030-11-01"),
     description: "21.5 inches Full HD widescreen IPS display...",
     image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png",
     ratingRate: 2.9,
@@ -143,6 +157,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
     price: 29.95,
+    promotionPrice: 24.95,
+    promotionEnd: new Date("2030-10-26"),
     description: "100% POLYURETHANE(shell) 100% POLYESTER(lining)...",
     image: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png",
     ratingRate: 2.9,
@@ -161,6 +177,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
     price: 9.85,
+    promotionPrice: 8.5,
+    promotionEnd: new Date("2030-10-22"),
     description: "95% RAYON 5% SPANDEX, Made in USA or Imported...",
     image: "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png",
     ratingRate: 4.7,
@@ -179,6 +197,8 @@ const products: Prisma.ProductCreateInput[] = [
   {
     title: "DANVOUY Womens T Shirt Casual Cotton Short",
     price: 12.99,
+    promotionPrice: 9.99,
+    promotionEnd: new Date("2030-10-27"),
     description: "95%Cotton,5%Spandex, Features: Casual, Short Sleeve...",
     image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png",
     ratingRate: 3.6,

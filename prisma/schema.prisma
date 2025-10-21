@@ -18,29 +18,29 @@ model User {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
-  title       String
-  price       Decimal
-  description String
-  image       String
-
-  ratingRate  Float
-  ratingCount Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int       @id @default(autoincrement())
+  title          String
+  price          Decimal
+  description    String
+  image          String
+  promotionPrice Decimal?
+  promotionEnd   DateTime?
+  stock          Int
+  ratingRate     Float
+  ratingCount    Int
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   categoryId Int
-  category   Category   @relation(fields: [categoryId], references: [id])
   CartItem   CartItem[]
+  category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   @@map("products")
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -54,26 +54,23 @@ model Cart {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId Int  @unique
-  user   User @relation(fields: [userId], references: [id])
-
-  items CartItem[]
+  userId Int        @unique
+  items  CartItem[]
+  user   User       @relation(fields: [userId], references: [id])
 
   @@map("carts")
 }
 
 model CartItem {
-  id       Int @id @default(autoincrement())
-  quantity Int @default(1)
-
+  id        Int      @id @default(autoincrement())
+  quantity  Int      @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  cartId Int
-  cart   Cart @relation(fields: [cartId], references: [id])
+  cartId    Int
 
   productId Int
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cart      Cart    @relation(fields: [cartId], references: [id])
 
   @@unique([cartId, productId])
   @@map("cart_items")

@@ -25,9 +25,9 @@ export async function middleware(request: NextRequest) {
     }
 
     if (!pathname.startsWith("/api")) {
-      const signInUrl = new URL("/signin", request.url);
-      signInUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(signInUrl);
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
     }
 
     return NextResponse.json({ message: "Token inválido ou expirado." }, { status: 401 });
@@ -56,7 +56,6 @@ async function protectFront(request: NextRequest, pathname: string) {
 
   const response = NextResponse.next();
   response.headers.set("x-user", JSON.stringify({ userId, email }));
-  console.log(userId);
 
   return response;
 }

@@ -32,10 +32,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const teste = await headers();
-  // const aasd = teste.get("x-user");
-  // console.log(aasd);
- 
   return (
     <html lang="pt-br">
       <body

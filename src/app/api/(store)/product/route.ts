@@ -1,5 +1,7 @@
 import { db } from "@/app/lib/db";
-import { BadRequestError, HttpError } from "../../HttpErrors";
+import { HttpError } from "../../HttpErrors";
+import { getCategoryID } from "./getCategoryID";
+import { getPagination } from "./getPagination";
 
 export async function GET(req: Request) {
   try {
@@ -27,29 +29,4 @@ export async function GET(req: Request) {
       return Response.json({ message }, { status });
     }
   }
-}
-
-function getCategoryID(searchParams: URLSearchParams) {
-  const categoryIDParam = searchParams.get("categoryID");
-
-  let categoryID: number | undefined = undefined;
-
-  if (categoryIDParam !== null) {
-    const parsed = Number(categoryIDParam);
-
-    if (Number.isNaN(parsed) || parsed <= 0) {
-      throw new BadRequestError("categoryID precisa ser um número maior que 0");
-    }
-
-    categoryID = parsed;
-  }
-
-  return categoryID;
-}
-
-function getPagination(searchParams: URLSearchParams) {
-  const limit = searchParams.get("limit") ? Number(searchParams.get("limit")) : undefined;
-  const offSet = searchParams.get("offset") ? Number(searchParams.get("offset")) : undefined;
-
-  return { limit, offSet };
 }
