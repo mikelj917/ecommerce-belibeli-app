@@ -18,8 +18,14 @@ export class InternalServerError extends HttpError {
   }
 }
 
-export class ConflitError extends HttpError {
+export class ConflictError extends HttpError {
   constructor(message: string) {
     super(409, message);
+  }
+}
+
+export class UnauthorizedError extends HttpError {
+  constructor(message: string) {
+    super(401, message);
   }
 }

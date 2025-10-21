@@ -1,6 +1,6 @@
 import { StorePage } from "./_store/components/StorePage";
 
-const Home = () => {
+const Home = async () => {
   return <StorePage />;
 };
 

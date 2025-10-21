@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Kotta_One } from "next/font/google";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +27,15 @@ export const metadata: Metadata = {
   icons: "/belilogo.png",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const teste = await headers();
+  // const aasd = teste.get("x-user");
+  // console.log(aasd);
+ 
   return (
     <html lang="pt-br">
       <body

@@ -1,7 +1,7 @@
 import { db } from "@/app/lib/db";
 import type { RegisterBody } from "./RegisterBodyType";
 import bcrypt from "bcrypt";
-import { ConflitError } from "../../HttpErrors";
+import { ConflictError } from "../../HttpErrors";
 
 export async function registerService({
   name,
@@ -10,7 +10,7 @@ export async function registerService({
 }: Omit<RegisterBody, "confirm_password">) {
   const existingUser = await db.user.findUnique({ where: { email } });
   if (existingUser) {
-    throw new ConflitError("Já existe um usuário com esse e-mail");
+    throw new ConflictError("Já existe um usuário com esse e-mail");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
