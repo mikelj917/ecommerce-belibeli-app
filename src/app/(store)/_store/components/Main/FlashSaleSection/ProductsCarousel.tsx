@@ -36,7 +36,7 @@ export function ProductsCarousel({ isLoading, productsOnSale }: Props) {
         </div>
       </div>
       <CarouselContent
-        className="flex gap-4 px-6 py-10"
+        className="flex gap-4 py-10"
       >
         {isLoading
           ? [...Array(6)].map((_, index) => (
@@ -49,7 +49,7 @@ export function ProductsCarousel({ isLoading, productsOnSale }: Props) {
                 key={product.id}
                 className="relative z-10 basis-auto overflow-visible"
               >
-                <ProductCard product={product} onSale={true} />
+                <ProductCard product={product} />
               </CarouselItem>
             ))}
       </CarouselContent>

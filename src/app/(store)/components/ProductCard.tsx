@@ -5,13 +5,23 @@ import type { Product } from "@prisma/client";
 
 type ProductProps = {
   product: Product;
-  onSale?: boolean;
   grid?: boolean;
 };
 
-export const ProductCard = ({ product, grid, onSale }: ProductProps) => {
+export const ProductCard = ({ product, grid }: ProductProps) => {
   // const [isWishedState, setIsWishedState] = useState(isWished);
   const { setWishlistCount } = useWishlistCount();
+
+  const isSaleActive = (product: Product) => {
+    if (!product.promotionEnd) return false;
+
+    const now = new Date();
+    const end = new Date(product.promotionEnd);
+
+    return now < end;
+  };
+
+  const isProductOnSale = isSaleActive(product);
 
   const percentDiscount = product.promotionPrice
     ? Math.floor(
@@ -39,7 +49,7 @@ export const ProductCard = ({ product, grid, onSale }: ProductProps) => {
         />
 
         {/* Percent */}
-        {onSale && (
+        {isProductOnSale && (
           <strong className="absolute top-2 left-2 my-1 inline-block rounded-4xl bg-red-500 px-2 py-1 text-sm font-bold text-white">
             - {percentDiscount}% off
           </strong>
@@ -76,11 +86,11 @@ export const ProductCard = ({ product, grid, onSale }: ProductProps) => {
           <div className="flex items-center gap-1">
             <strong className="font-semibold text-gray-800">
               R$
-              {onSale
+              {isProductOnSale
                 ? Number(product.promotionPrice)?.toFixed(2)
                 : Number(product.price).toFixed(2)}
             </strong>
-            {onSale && (
+            {isProductOnSale && (
               <span className="text-sm text-red-500 line-through">
                 R${Number(product.price).toFixed(2)}
               </span>
