@@ -1,10 +1,9 @@
 "use client";
-
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { cn } from "@/app/lib/utils";
-import { Button } from "./Button";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@/assets/Icons";
+import { Button } from "./Button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -132,11 +131,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" data-slot="carousel-content">
-      <div
-        className={cn("flex", orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", className)}
-        {...props}
-      />
+    <div ref={carouselRef} className="overflow-hidden px-2" data-slot="carousel-content">
+      <div className={cn(className)} {...props} />
     </div>
   );
 }
@@ -172,10 +168,7 @@ function CarouselPrevious({
       data-slot="carousel-previous"
       variant={variant}
       size={size}
-      className={cn(
-        "cursor-pointer rounded-md border-1 px-8 transition-colors active:bg-black active:text-white disabled:opacity-50",
-        className,
-      )}
+      className={cn(className)}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
@@ -192,17 +185,14 @@ function CarouselNext({
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
       data-slot="carousel-next"
       variant={variant}
       size={size}
-      className={cn(
-        "cursor-pointer rounded-md border-1 px-8 transition-colors active:bg-black active:text-white disabled:opacity-50",
-        className,
-      )}
+      className={cn(className)}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}

@@ -26,6 +26,7 @@ model Product {
   promotionPrice Decimal?
   promotionEnd   DateTime?
   stock          Int
+  totalSold      Int
   ratingRate     Float
   ratingCount    Int
   createdAt      DateTime  @default(now())

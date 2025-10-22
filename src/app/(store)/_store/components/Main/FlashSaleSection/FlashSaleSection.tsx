@@ -1,48 +1,18 @@
 "use client";
 import { useProducts } from "@/app/(store)/hooks/useProducts";
-import { SectionHeader } from "./SectionHeader";
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@/assets/Icons";
-import { useState, useRef, useEffect, useCallback } from "react";
 import { ProductsCarousel } from "./ProductsCarousel";
-import { CarouselNext, CarouselPrevious } from "./Carousel";
-
-const ITEM_WIDTH_PX = 270;
 
 export const FlashSaleSection = () => {
   const { data, isLoading, isError } = useProducts();
-  const [scrollOffset, setScrollOffset] = useState(0);
 
-  const productsOnSale = data?.products.filter((product) => product.promotionEnd !== null);
+  const productsOnSale = data?.products.filter((product) => {
+    if (!product.promotionEnd) return false;
 
-  const containerRef = useRef<HTMLDivElement>(null);
+    const now = new Date();
+    const end = new Date(product.promotionEnd);
 
-  const calculateMaxScroll = useCallback(() => {
-    if (!containerRef.current || productsOnSale?.length === 0) return 0;
-    const totalContentWidth = productsOnSale?.length! * ITEM_WIDTH_PX;
-    const visibleWidth = containerRef.current.offsetWidth;
-    return Math.max(0, totalContentWidth - visibleWidth);
-  }, [productsOnSale]);
-
-  const maxScroll = calculateMaxScroll();
-
-  useEffect(() => {
-    const handleResize = () => setScrollOffset((prev) => Math.min(prev, calculateMaxScroll()));
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [calculateMaxScroll]);
-
-  const handleNext = () => {
-    const containerWidth = containerRef.current?.offsetWidth || 0;
-    setScrollOffset((prev) => Math.min(prev + containerWidth, maxScroll));
-  };
-
-  const handlePrev = () => {
-    const containerWidth = containerRef.current?.offsetWidth || 0;
-    setScrollOffset((prev) => Math.max(prev - containerWidth, 0));
-  };
-
-  const canGoNext = scrollOffset < maxScroll;
-  const canGoPrev = scrollOffset > 0;
+    return now < end;
+  });
 
   if (isError) {
     return <section className="p-12 text-center text-red-600">Erro ao carregar ofertas.</section>;

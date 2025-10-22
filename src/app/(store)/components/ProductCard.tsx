@@ -1,23 +1,24 @@
 "use client";
 import { useWishlistCount } from "@/app/(store)/contexts/WishlistCount";
 import { HeartIcon, ShoppingCartIcon, StarIcon } from "@/assets/Icons";
-import { getWishlistIDs, toggleWishlistItem } from "@/app/(store)/services/wishListStorage";
-import { useState } from "react";
 import type { Product } from "@prisma/client";
 
 type ProductProps = {
   product: Product;
+  onSale?: boolean;
   grid?: boolean;
 };
 
-export const ProductCard = ({ product, grid }: ProductProps) => {
+export const ProductCard = ({ product, grid, onSale }: ProductProps) => {
   // const [isWishedState, setIsWishedState] = useState(isWished);
   const { setWishlistCount } = useWishlistCount();
 
-  // const percent = Math.floor((soldQuantity / totalQuantity) * 100);
-  // const percentString = `${percent}%`;
+  const percentDiscount = product.promotionPrice
+    ? Math.floor(
+        ((Number(product.price) - Number(product.promotionPrice)) / Number(product.price)) * 100,
+      )
+    : 0;
 
-  const onSale = new Date() < new Date(product.promotionEnd ?? "");
   // const handleWishlistToggle = () => {
   //   setIsWishedState((prev) => !prev);
   //   toggleWishlistItem(product.id);
@@ -28,7 +29,7 @@ export const ProductCard = ({ product, grid }: ProductProps) => {
     <div
       className={`group cursor-pointer overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition hover:scale-105 ${grid ? "w-full" : "w-60 flex-shrink-0"}`}
     >
-      {/* Image + Wish Button + Percent */}
+      {/* Image + Percent + Wish Button */}
       <div className="relative bg-black/10 p-4">
         {/* Image */}
         <img
@@ -40,7 +41,7 @@ export const ProductCard = ({ product, grid }: ProductProps) => {
         {/* Percent */}
         {onSale && (
           <strong className="absolute top-2 left-2 my-1 inline-block rounded-4xl bg-red-500 px-2 py-1 text-sm font-bold text-white">
-            - 50% off
+            - {percentDiscount}% off
           </strong>
         )}
 

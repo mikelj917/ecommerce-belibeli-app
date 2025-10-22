@@ -13,6 +13,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
     ratingRate: 3.9,
     ratingCount: 120,
+    stock: 45,
+    totalSold: 320,
     category: { connect: { name: "men's clothing" } },
   },
   {
@@ -22,6 +24,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png",
     ratingRate: 4.1,
     ratingCount: 259,
+    stock: 120,
+    totalSold: 800,
     category: { connect: { name: "men's clothing" } },
   },
   {
@@ -33,6 +37,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
     ratingRate: 4.7,
     ratingCount: 500,
+    stock: 30,
+    totalSold: 950,
     category: { connect: { name: "men's clothing" } },
   },
   {
@@ -42,6 +48,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png",
     ratingRate: 2.1,
     ratingCount: 430,
+    stock: 200,
+    totalSold: 150,
     category: { connect: { name: "men's clothing" } },
   },
   {
@@ -54,6 +62,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png",
     ratingRate: 4.6,
     ratingCount: 400,
+    stock: 10,
+    totalSold: 240,
     category: { connect: { name: "jewelery" } },
   },
   {
@@ -63,6 +73,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_t.png",
     ratingRate: 3.9,
     ratingCount: 70,
+    stock: 25,
+    totalSold: 120,
     category: { connect: { name: "jewelery" } },
   },
   {
@@ -74,6 +86,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png",
     ratingRate: 3.0,
     ratingCount: 400,
+    stock: 150,
+    totalSold: 500,
     category: { connect: { name: "jewelery" } },
   },
   {
@@ -83,6 +97,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_t.png",
     ratingRate: 1.9,
     ratingCount: 100,
+    stock: 300,
+    totalSold: 60,
     category: { connect: { name: "jewelery" } },
   },
   {
@@ -94,6 +110,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_t.png",
     ratingRate: 3.3,
     ratingCount: 203,
+    stock: 80,
+    totalSold: 430,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -103,6 +121,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_t.png",
     ratingRate: 2.9,
     ratingCount: 470,
+    stock: 50,
+    totalSold: 270,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -114,6 +134,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png",
     ratingRate: 4.8,
     ratingCount: 319,
+    stock: 60,
+    totalSold: 980,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -123,6 +145,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_t.png",
     ratingRate: 4.8,
     ratingCount: 400,
+    stock: 40,
+    totalSold: 850,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -134,6 +158,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png",
     ratingRate: 2.9,
     ratingCount: 250,
+    stock: 15,
+    totalSold: 210,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -143,6 +169,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png",
     ratingRate: 2.2,
     ratingCount: 140,
+    stock: 10,
+    totalSold: 90,
     category: { connect: { name: "electronics" } },
   },
   {
@@ -152,6 +180,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_t.png",
     ratingRate: 2.6,
     ratingCount: 235,
+    stock: 60,
+    totalSold: 140,
     category: { connect: { name: "women's clothing" } },
   },
   {
@@ -163,6 +193,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png",
     ratingRate: 2.9,
     ratingCount: 340,
+    stock: 80,
+    totalSold: 250,
     category: { connect: { name: "women's clothing" } },
   },
   {
@@ -172,6 +204,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2t.png",
     ratingRate: 3.8,
     ratingCount: 679,
+    stock: 40,
+    totalSold: 900,
     category: { connect: { name: "women's clothing" } },
   },
   {
@@ -183,6 +217,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png",
     ratingRate: 4.7,
     ratingCount: 130,
+    stock: 25,
+    totalSold: 620,
     category: { connect: { name: "women's clothing" } },
   },
   {
@@ -192,6 +228,8 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_t.png",
     ratingRate: 4.5,
     ratingCount: 146,
+    stock: 70,
+    totalSold: 380,
     category: { connect: { name: "women's clothing" } },
   },
   {
@@ -203,9 +241,12 @@ const products: Prisma.ProductCreateInput[] = [
     image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png",
     ratingRate: 3.6,
     ratingCount: 145,
+    stock: 90,
+    totalSold: 310,
     category: { connect: { name: "women's clothing" } },
   },
 ];
+
 
 async function main() {
   console.log("🚀 Iniciando o processo de seed...");
