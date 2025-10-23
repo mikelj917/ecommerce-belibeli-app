@@ -14,15 +14,18 @@ import {
   CreditCardIcon,
   ShoppingCartIcon,
 } from "@/assets/Icons";
+import { link } from "fs";
 
 export const headerActionIcons = [
   {
     icon: <HeartIcon className="size-7 cursor-pointer stroke-2" />,
     key: "Heart",
+    link: "/wishlist",
   },
   {
     icon: <ShoppingCartIcon className="size-7 cursor-pointer stroke-2" />,
     key: "Cart",
+    link: "/cart",
   },
   {
     icon: <MenuIcon className="size-7 cursor-pointer" />,
@@ -33,6 +36,7 @@ export const headerActionIcons = [
     icon: <ProfileIcon className="size-7 cursor-pointer stroke-2" />,
     key: "Profile",
     className: "hidden lg:flex",
+    link: "/profile",
   },
 ];
 

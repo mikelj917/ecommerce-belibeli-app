@@ -2,12 +2,13 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { HttpError, UnauthorizedError } from "./app/api/HttpErrors";
 import { jwtVerify, type JWTPayload } from "jose";
+import { cookies } from "next/headers";
 
 export const config = {
   matcher: ["/api/:path*", "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   try {
@@ -17,6 +18,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const response = await protectFront(request, pathname);
+
     return response;
   } catch (error) {
     if (error instanceof HttpError) {
@@ -48,8 +50,19 @@ async function protectApi(request: NextRequest, pathname: string) {
 }
 
 async function protectFront(request: NextRequest, pathname: string) {
+  if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
+    const cookieStore = await cookies();
+
+    if (cookieStore.get("accessToken")) {
+      const homeUrl = new URL("/", request.url);
+      homeUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(homeUrl);
+    }
+  }
+
   const protectedPaths = ["/cart"];
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
+
   if (!isProtected) return NextResponse.next();
 
   const { userId, email } = await verifyToken(request);

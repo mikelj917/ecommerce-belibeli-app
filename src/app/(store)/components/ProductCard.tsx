@@ -1,12 +1,20 @@
 "use client";
 import { useWishlistCount } from "@/app/(store)/contexts/WishlistCount";
 import { HeartIcon, ShoppingCartIcon, StarIcon } from "@/assets/Icons";
+import { API } from "@/shared/services/API";
 import type { Product } from "@prisma/client";
 
 type ProductProps = {
   product: Product;
   grid?: boolean;
 };
+
+const handleCartClick = async (productID: number) => {
+  const cart = await API.post("/cart", { productID });
+  console.log(cart);
+};
+
+const handleWishClick = () => {};
 
 export const ProductCard = ({ product, grid }: ProductProps) => {
   // const [isWishedState, setIsWishedState] = useState(isWished);
@@ -100,6 +108,7 @@ export const ProductCard = ({ product, grid }: ProductProps) => {
 
         {/* Cart Button */}
         <button
+          onClick={() => handleCartClick(product.id)}
           className={`absolute right-2 bottom-2 block cursor-pointer rounded-full bg-white p-1 shadow-md transition duration-150 hover:scale-110 active:scale-140 lg:right-3 lg:bottom-3 lg:hidden lg:group-hover:block`}
           aria-label="Add to cart"
         >

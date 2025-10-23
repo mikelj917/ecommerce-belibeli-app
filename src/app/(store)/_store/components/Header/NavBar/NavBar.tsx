@@ -25,13 +25,13 @@ export const NavBar = () => {
           {headerActionIcons.map((action) => {
             return (
               <div key={action.key} className={`flex items-center gap-0.5 ${action.className}`}>
-                <IconMobileButton onClick={() => handleActionClick(action.key)}>
+                <IconMobileButton link={action.link} onClick={() => handleActionClick(action.key)}>
                   {action.icon}
                 </IconMobileButton>
                 {action.key === "Heart" && (
-                  <span className="text-sm font-bold">{wishlistcount}</span>
+                  <span className="mb-2 text-sm font-bold">{wishlistcount}</span>
                 )}
-                {action.key === "Cart" && <span className="text-sm font-bold">{0}</span>}
+                {action.key === "Cart" && <span className="mb-2 text-sm font-bold">{0}</span>}
               </div>
             );
           })}
