@@ -23,10 +23,10 @@ export const WishlistCountProvider = ({ children }: { children: ReactNode }) => 
   );
 };
 
-export const useWishlistCount = () => {
-  const context = useContext(WishlistCountContext);
-  if (context === undefined) {
-    throw new Error("useSideMenu must be used within a SideMenuProvider");
-  }
-  return context;
-};
+// export const useWishlistCount = () => {
+//   const context = useContext(WishlistCountContext);
+//   if (context === undefined) {
+//     throw new Error("useSideMenu must be used within a SideMenuProvider");
+//   }
+//   return context;
+// };

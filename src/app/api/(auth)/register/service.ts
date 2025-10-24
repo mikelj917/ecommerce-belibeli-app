@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import type { RegisterBody } from "./RegisterBodyType";
 import bcrypt from "bcrypt";
 import { ConflictError } from "../../HttpErrors";

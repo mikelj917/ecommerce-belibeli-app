@@ -1,6 +1,7 @@
 import { CategoriesSection } from "./CategoriesSection/CategoriesSection";
 import { FlashSaleSection } from "./FlashSaleSection/FlashSaleSection";
 import { ForYouSection } from "./ForYouSection/ForYouSection";
+import { ProductDetailsModal } from "./ProductDetailsModal/ProductDetailsModal";
 
 export const Main = () => {
   return (
@@ -8,6 +9,7 @@ export const Main = () => {
       <CategoriesSection />
       <FlashSaleSection />
       <ForYouSection />
+      {/* <ProductDetailsModal /> */}
     </main>
   );
 };

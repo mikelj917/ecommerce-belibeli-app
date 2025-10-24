@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { HttpError, UnauthorizedError } from "./app/api/HttpErrors";
 import { jwtVerify, type JWTPayload } from "jose";
 import { cookies } from "next/headers";
+import { JWTExpired, JWTInvalid } from "jose/errors";
 
 export const config = {
   matcher: ["/api/:path*", "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)"],
@@ -21,9 +22,8 @@ export async function proxy(request: NextRequest) {
 
     return response;
   } catch (error) {
-    if (error instanceof HttpError) {
-      const { message, status } = error;
-      return NextResponse.json({ message }, { status });
+    if (error instanceof JWTExpired || error instanceof JWTInvalid) {
+      (await cookies()).delete("accessToken");
     }
 
     if (!pathname.startsWith("/api")) {
@@ -32,7 +32,15 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    return NextResponse.json({ message: "Token inválido ou expirado." }, { status: 401 });
+    if (
+      error instanceof JWTInvalid ||
+      error instanceof JWTExpired ||
+      error instanceof UnauthorizedError
+    ) {
+      return NextResponse.json({ message: "Token inválido ou expirado." }, { status: 401 });
+    }
+
+    return NextResponse.json({ message: "Erro interno no servidor" }, { status: 500 });
   }
 }
 
@@ -51,9 +59,7 @@ async function protectApi(request: NextRequest, pathname: string) {
 
 async function protectFront(request: NextRequest, pathname: string) {
   if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
-    const cookieStore = await cookies();
-
-    if (cookieStore.get("accessToken")) {
+    if (request.cookies.get("accessToken")) {
       const homeUrl = new URL("/", request.url);
       homeUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(homeUrl);
@@ -79,5 +85,6 @@ async function verifyToken(request: NextRequest) {
 
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
   const { payload } = await jwtVerify(token, secret);
+
   return payload as JWTPayload & { userId: number; email: string };
 }

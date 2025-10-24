@@ -7,13 +7,13 @@ import {
   CarouselPrevious,
 } from "./Carousel";
 import { SectionHeader } from "./SectionHeader";
-import { ProductCardSkeleton } from "@/app/(store)/components/ProductCardSkeleton";
-import { ProductCard } from "@/app/(store)/components/ProductCard";
+import { ProductCardSkeleton } from "@/app/(view)/(store)/components/ProductCardSkeleton";
+import { ProductCard } from "@/app/(view)/(store)/components/ProductCard";
 import { useScreenSize } from "@/shared/hooks/useScreenSize";
-import type { Product } from "@prisma/client";
+import type { ProductInclude } from "@/shared/types/Includes";
 
 type Props = {
-  productsOnSale?: Product[];
+  productsOnSale?: ProductInclude[];
   isLoading: boolean;
 };
 
@@ -35,9 +35,7 @@ export function ProductsCarousel({ isLoading, productsOnSale }: Props) {
           <CarouselNext className="cursor-pointer rounded-md border-1 px-10 transition-colors active:bg-black active:text-white disabled:opacity-50" />
         </div>
       </div>
-      <CarouselContent
-        className="flex gap-4 py-10"
-      >
+      <CarouselContent className="flex gap-4 py-10">
         {isLoading
           ? [...Array(6)].map((_, index) => (
               <CarouselItem key={index} className="basis-auto">
@@ -45,10 +43,7 @@ export function ProductsCarousel({ isLoading, productsOnSale }: Props) {
               </CarouselItem>
             ))
           : productsOnSale?.map((product) => (
-              <CarouselItem
-                key={product.id}
-                className="relative z-10 basis-auto overflow-visible"
-              >
+              <CarouselItem key={product.id} className="relative z-10 basis-auto overflow-visible">
                 <ProductCard product={product} />
               </CarouselItem>
             ))}

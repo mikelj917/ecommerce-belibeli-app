@@ -3,7 +3,29 @@ const prisma = new PrismaClient();
 
 const categories = ["men's clothing", "jewelery", "electronics", "women's clothing"];
 
+const sizeOptions = {
+  type: "Tamanho",
+  values: {
+    create: [{ value: "P" }, { value: "M" }, { value: "G" }, { value: "GG" }],
+  },
+};
+
+const colorOptions = (colors: string[]) => ({
+  type: "Cor",
+  values: {
+    create: colors.map((color) => ({ value: color })),
+  },
+});
+
+const storageOptions = {
+  type: "Capacidade",
+  values: {
+    create: [{ value: "1TB" }, { value: "2TB" }, { value: "4TB" }],
+  },
+};
+
 const products: Prisma.ProductCreateInput[] = [
+  // 1. Fjallraven Backpack (Bags usually don't have size/color options in e-commerce APIs, but we'll add one color)
   {
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
     price: 109.95,
@@ -15,8 +37,12 @@ const products: Prisma.ProductCreateInput[] = [
     ratingCount: 120,
     stock: 45,
     totalSold: 320,
-    category: { connect: { name: "men's clothing" } },
+    category: { connect: { name: "men's clothing" } }, // NOTE: Backpacks are usually in 'accessories' or 'bags'
+    ProductOption: {
+      create: [colorOptions(["Azul Marinho", "Verde Oliva", "Preto"])],
+    },
   },
+  // 2. Mens Casual T-Shirts (Size and basic colors)
   {
     title: "Mens Casual Premium Slim Fit T-Shirts ",
     price: 22.3,
@@ -27,7 +53,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 120,
     totalSold: 800,
     category: { connect: { name: "men's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Branco", "Cinza Mescla", "Preto"])],
+    },
   },
+  // 3. Mens Cotton Jacket (Size and classic colors)
   {
     title: "Mens Cotton Jacket",
     price: 55.99,
@@ -40,7 +70,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 30,
     totalSold: 950,
     category: { connect: { name: "men's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Bege", "Verde Militar"])],
+    },
   },
+  // 4. Mens Casual Slim Fit (Size and common colors)
   {
     title: "Mens Casual Slim Fit",
     price: 15.99,
@@ -51,7 +85,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 200,
     totalSold: 150,
     category: { connect: { name: "men's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Preto", "Azul"])],
+    },
   },
+  // 5. John Hardy Bracelet (Metal type)
   {
     title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
     price: 695,
@@ -65,7 +103,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 10,
     totalSold: 240,
     category: { connect: { name: "jewelery" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Material",
+          values: {
+            create: [{ value: "Prata" }, { value: "Ouro Amarelo" }],
+          },
+        },
+      ],
+    },
   },
+  // 6. Solid Gold Ring (Ring size)
   {
     title: "Solid Gold Petite Micropave",
     price: 168,
@@ -76,7 +125,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 25,
     totalSold: 120,
     category: { connect: { name: "jewelery" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Tamanho do Anel",
+          values: {
+            create: [{ value: "14" }, { value: "16" }, { value: "18" }, { value: "20" }],
+          },
+        },
+      ],
+    },
   },
+  // 7. White Gold Plated Princess Ring (No options, just the one design)
   {
     title: "White Gold Plated Princess",
     price: 9.99,
@@ -89,7 +149,9 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 150,
     totalSold: 500,
     category: { connect: { name: "jewelery" } },
+    // Sem opções para este produto
   },
+  // 8. Pierced Owl Earrings (No options)
   {
     title: "Pierced Owl Rose Gold Plated Stainless Steel Double",
     price: 10.99,
@@ -100,7 +162,9 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 300,
     totalSold: 60,
     category: { connect: { name: "jewelery" } },
+    // Sem opções para este produto
   },
+  // 9. WD 2TB External Hard Drive (Storage options)
   {
     title: "WD 2TB Elements Portable External Hard Drive - USB 3.0",
     price: 64,
@@ -113,7 +177,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 80,
     totalSold: 430,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [storageOptions],
+    },
   },
+  // 10. SanDisk SSD (Storage options)
   {
     title: "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
     price: 109,
@@ -124,7 +192,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 50,
     totalSold: 270,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Capacidade",
+          values: {
+            create: [{ value: "256GB" }, { value: "500GB" }, { value: "1TB" }],
+          },
+        },
+      ],
+    },
   },
+  // 11. Silicon Power SSD (Storage options)
   {
     title: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
     price: 109,
@@ -137,7 +216,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 60,
     totalSold: 980,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Capacidade",
+          values: {
+            create: [{ value: "256GB" }, { value: "512GB" }, { value: "1TB" }],
+          },
+        },
+      ],
+    },
   },
+  // 12. WD 4TB Gaming Drive (Storage options)
   {
     title: "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
     price: 114,
@@ -148,7 +238,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 40,
     totalSold: 850,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Compatibilidade",
+          values: {
+            create: [{ value: "PS4" }, { value: "PC" }],
+          },
+        },
+      ],
+    },
   },
+  // 13. Acer Monitor (Size/Resolution options)
   {
     title: "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
     price: 599,
@@ -161,7 +262,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 15,
     totalSold: 210,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Tamanho",
+          values: {
+            create: [{ value: '21.5"' }, { value: '24"' }],
+          },
+        },
+      ],
+    },
   },
+  // 14. Samsung Monitor (Size/Resolution options)
   {
     title: "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor – Super Ultrawide Screen QLED",
     price: 999.99,
@@ -172,7 +284,18 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 10,
     totalSold: 90,
     category: { connect: { name: "electronics" } },
+    ProductOption: {
+      create: [
+        {
+          type: "Tamanho",
+          values: {
+            create: [{ value: '49"' }, { value: '34"' }],
+          },
+        },
+      ],
+    },
   },
+  // 15. BIYLACLESEN Women's Jacket (Size and basic colors)
   {
     title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
     price: 56.99,
@@ -183,7 +306,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 60,
     totalSold: 140,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Rosa", "Roxo", "Preto"])],
+    },
   },
+  // 16. Lock and Love Women's Jacket (Size and colors)
   {
     title: "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
     price: 29.95,
@@ -196,7 +323,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 80,
     totalSold: 250,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Preto", "Marrom", "Vermelho"])],
+    },
   },
+  // 17. Rain Jacket Women Windbreaker (Size and colors)
   {
     title: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
     price: 39.99,
@@ -207,7 +338,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 40,
     totalSold: 900,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Azul", "Branco"])],
+    },
   },
+  // 18. MBJ Women's T Shirt (Size and colors)
   {
     title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
     price: 9.85,
@@ -220,7 +355,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 25,
     totalSold: 620,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Preto", "Rosa", "Bege"])],
+    },
   },
+  // 19. Opna Women's Short Sleeve Moisture (Size and colors)
   {
     title: "Opna Women's Short Sleeve Moisture",
     price: 7.95,
@@ -231,7 +370,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 70,
     totalSold: 380,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Cinza", "Azul Claro"])],
+    },
   },
+  // 20. DANVOUY Womens T Shirt (Size and colors)
   {
     title: "DANVOUY Womens T Shirt Casual Cotton Short",
     price: 12.99,
@@ -244,9 +387,11 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 90,
     totalSold: 310,
     category: { connect: { name: "women's clothing" } },
+    ProductOption: {
+      create: [sizeOptions, colorOptions(["Verde", "Branco"])],
+    },
   },
 ];
-
 
 async function main() {
   console.log("🚀 Iniciando o processo de seed...");

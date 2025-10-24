@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { cn } from "@/app/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@/assets/Icons";
 import { Button } from "./Button";
 

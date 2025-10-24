@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import { loginValidate } from "./validate";
 import { loginService } from "./service";
 import { HttpError } from "../../HttpErrors";

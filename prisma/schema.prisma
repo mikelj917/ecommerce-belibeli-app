@@ -17,6 +17,17 @@ model User {
   @@map("users")
 }
 
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  product Product[]
+
+  @@map("categories")
+}
+
 model Product {
   id             Int       @id @default(autoincrement())
   title          String
@@ -32,22 +43,31 @@ model Product {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  categoryId Int
-  CartItem   CartItem[]
-  category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId    Int
+  CartItem      CartItem[]
+  category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  ProductOption ProductOption[]
 
   @@map("products")
 }
 
-model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+model ProductOption {
+  id        Int                  @id @default(autoincrement())
+  product   Product              @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  type      String
+  values    ProductOptionValue[]
 
-  product Product[]
+  @@map("product_options")
+}
 
-  @@map("categories")
+model ProductOptionValue {
+  id              Int           @id @default(autoincrement())
+  value           String
+  productOption   ProductOption @relation(fields: [productOptionId], references: [id], onDelete: Cascade)
+  productOptionId Int
+
+  @@map("product_option_values")
 }
 
 model Cart {
@@ -57,7 +77,7 @@ model Cart {
 
   userId Int        @unique
   items  CartItem[]
-  user   User       @relation(fields: [userId], references: [id])
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("carts")
 }
@@ -71,7 +91,7 @@ model CartItem {
 
   productId Int     @map("rating_count")
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  cart      Cart    @relation(fields: [cartId], references: [id])
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
   @@unique([cartId, productId])
   @@map("cart_items")

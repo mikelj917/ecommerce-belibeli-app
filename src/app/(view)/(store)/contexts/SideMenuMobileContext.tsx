@@ -1,20 +1,12 @@
 "use client";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 type SideMenuContextType = {
   isSideMenuMobOpen: boolean;
   setIsSideMenuMobOpen: (isOpen: boolean) => void;
 };
 
-const SideMenuContext = createContext<SideMenuContextType | undefined>(
-  undefined,
-);
+const SideMenuContext = createContext<SideMenuContextType | undefined>(undefined);
 
 export const SideMenuProvider = ({ children }: { children: ReactNode }) => {
   const [isSideMenuMobOpen, setIsSideMenuMobOpen] = useState(false);
@@ -30,9 +22,7 @@ export const SideMenuProvider = ({ children }: { children: ReactNode }) => {
   }, [isSideMenuMobOpen]);
 
   return (
-    <SideMenuContext.Provider
-      value={{ isSideMenuMobOpen, setIsSideMenuMobOpen }}
-    >
+    <SideMenuContext.Provider value={{ isSideMenuMobOpen, setIsSideMenuMobOpen }}>
       {children}
     </SideMenuContext.Provider>
   );

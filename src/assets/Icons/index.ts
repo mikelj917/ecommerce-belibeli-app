@@ -24,3 +24,4 @@ export * from "./Eye";
 export * from "./EyeSlash";
 export * from "./CheckCircle";
 export * from "./ExclamationCircle";
+export * from "./ArrowLeft";

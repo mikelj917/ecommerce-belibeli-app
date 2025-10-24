@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import type { LoginBody } from "./LoginBodyType";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -20,7 +20,7 @@ export async function loginService({ email, password }: LoginBody) {
   const { password: _pw, ...userWithoutPassword } = user;
 
   const accessToken = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET!, {
-    expiresIn: "1d",
+    expiresIn: "15s",
   });
 
   return { user: userWithoutPassword, accessToken };

@@ -4,8 +4,7 @@ import { headerActionIcons } from "./MenuItems";
 import { IconMobileButton } from "@/shared/components/IconMobileButton";
 import { HeaderLogo } from "./Logo";
 import { SideMenu } from "./SideMenu/SideMenu";
-import { useSideMenu } from "@/app/(store)/_store/contexts/SideMenuMobile";
-import { useWishlistCount } from "@/app/(store)/contexts/WishlistCount";
+import { useSideMenu } from "@/app/(view)/(store)/contexts/SideMenuMobileContext";
 
 export const NavBar = () => {
   const { isSideMenuMobOpen, setIsSideMenuMobOpen } = useSideMenu();
@@ -13,8 +12,6 @@ export const NavBar = () => {
   const handleActionClick = (key: string) => {
     key === "Menu" ? setIsSideMenuMobOpen(true) : undefined;
   };
-
-  const { wishlistcount } = useWishlistCount();
 
   return (
     <nav className="flex gap-3 lg:gap-6">
@@ -28,9 +25,7 @@ export const NavBar = () => {
                 <IconMobileButton link={action.link} onClick={() => handleActionClick(action.key)}>
                   {action.icon}
                 </IconMobileButton>
-                {action.key === "Heart" && (
-                  <span className="mb-2 text-sm font-bold">{wishlistcount}</span>
-                )}
+                {action.key === "Heart" && <span className="mb-2 text-sm font-bold">{0}</span>}
                 {action.key === "Cart" && <span className="mb-2 text-sm font-bold">{0}</span>}
               </div>
             );

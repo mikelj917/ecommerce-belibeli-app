@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import { HttpError } from "../../HttpErrors";
 import { getCategoryID } from "./getCategoryID";
 import { getPagination } from "./getPagination";
@@ -13,6 +13,10 @@ export async function GET(req: Request) {
 
     const products = await db.product.findMany({
       where: { categoryId: categoryID },
+      include: {
+        category: { select: { name: true } },
+        ProductOption: { include: { values: true } },
+      },
       skip: offSet,
       take: limit,
     });
