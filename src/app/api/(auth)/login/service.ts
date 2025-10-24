@@ -20,7 +20,7 @@ export async function loginService({ email, password }: LoginBody) {
   const { password: _pw, ...userWithoutPassword } = user;
 
   const accessToken = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET!, {
-    expiresIn: "15s",
+    expiresIn: "1d",
   });
 
   return { user: userWithoutPassword, accessToken };

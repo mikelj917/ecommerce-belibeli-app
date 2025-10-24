@@ -1,10 +1,12 @@
-"use client";
+import { cookies } from "next/headers";
 import { CartProvider } from "./contexts/CartContext";
 import { SideMenuProvider } from "./contexts/SideMenuMobileContext";
 
-export default function StoreLayout({ children }: { children: React.ReactNode }) {
+export default async function StoreLayout({ children }: { children: React.ReactNode }) {
+  const userToken = (await cookies()).get("accessToken");
+
   return (
-    <CartProvider>
+    <CartProvider userToken={userToken?.value}>
       <SideMenuProvider>{children}</SideMenuProvider>
     </CartProvider>
   );

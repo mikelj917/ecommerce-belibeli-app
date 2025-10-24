@@ -1,8 +1,8 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import type { NextRequest } from "next/server";
 import { HttpError } from "../../HttpErrors";
 import { createCartItem } from "./createCartItem";
-import { incrementCartItem } from "./incrementeCartItem";
+import { incrementCartItem } from "./incrementCartItem";
 
 export async function GET(req: Request) {
   const userId = Number(req.headers.get("x-userID"));

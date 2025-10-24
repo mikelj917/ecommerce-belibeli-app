@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 
 type IncrementCartItemProps = {
   cartItemId: number;

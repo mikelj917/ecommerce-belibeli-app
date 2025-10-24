@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/shared/lib/db";
 import { ConflictError } from "../../HttpErrors";
 
 type CreateCartItemProps = {
@@ -33,7 +33,7 @@ export async function createCartItem({ userId, productId }: CreateCartItemProps)
     throw new ConflictError("Este item já está no carrinho.");
   }
 
-  const cardItem = await db.cartItem.create({
+  const cartItem = await db.cartItem.create({
     data: {
       cartId: existingCart.id,
       productId,
@@ -41,5 +41,5 @@ export async function createCartItem({ userId, productId }: CreateCartItemProps)
     },
   });
 
-  return cardItem;
+  return cartItem;
 }

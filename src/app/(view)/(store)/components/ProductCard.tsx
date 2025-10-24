@@ -3,12 +3,12 @@ import { HeartIcon, ShoppingCartIcon, StarIcon } from "@/assets/Icons";
 import { useCartContext } from "../contexts/CartContext";
 import type { ProductInclude } from "@/shared/types/Includes";
 
-type ProductProps = {
+type ProductCardProps = {
   product: ProductInclude;
   grid?: boolean;
 };
 
-export const ProductCard = ({ product, grid }: ProductProps) => {
+export const ProductCard = ({ product, grid }: ProductCardProps) => {
   // const [isWishedState, setIsWishedState] = useState(isWished);
   const { handleCartClick } = useCartContext();
 
@@ -105,7 +105,7 @@ export const ProductCard = ({ product, grid }: ProductProps) => {
         {/* Cart Button */}
         <button
           onClick={() => onCartClick(product)}
-          className={`absolute right-2 bottom-2 block cursor-pointer rounded-full bg-white p-1 shadow-md transition duration-150 hover:scale-110 active:scale-140 lg:right-3 lg:bottom-3 lg:hidden lg:group-hover:block`}
+          className={`absolute right-2 bottom-2 hidden cursor-pointer rounded-full bg-white p-1 shadow-md transition duration-150 hover:scale-110 active:scale-140 lg:right-3 lg:bottom-3 lg:hidden lg:group-hover:block`}
           aria-label="Add to cart"
         >
           <ShoppingCartIcon
