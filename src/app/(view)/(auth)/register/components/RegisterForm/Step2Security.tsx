@@ -1,5 +1,5 @@
 "use client";
-import { InputForm } from "@/app/(auth)/components/InputForm";
+import { InputForm } from "@/app/(view)/(auth)/components/InputForm";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { RegisterFormData } from "../../schemas/registerSchema";
 import { useState } from "react";

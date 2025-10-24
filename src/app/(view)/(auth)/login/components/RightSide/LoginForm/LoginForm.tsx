@@ -2,11 +2,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { loginSchema, type loginFormData } from "../../../schemas/login-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputForm } from "@/app/(auth)/components/InputForm";
+import { InputForm } from "@/app/(view)/(auth)/components/InputForm";
 import { EnvelopeIcon, EyeIcon, EyeSlashIcon } from "@/assets/Icons";
 import { useState } from "react";
-import { OrDivider } from "@/app/(auth)/components/OrDivider";
-import { SocialLoginButton } from "@/app/(auth)/components/SocialLoginButton";
+import { OrDivider } from "@/app/(view)/(auth)/components/OrDivider";
+import { SocialLoginButton } from "@/app/(view)/(auth)/components/SocialLoginButton";
 import googleGLogo from "@/assets/images/auth-logos/google-G.png";
 import Link from "next/link";
 import { ErrorNotification } from "@/shared/components/ErrorNotification";
