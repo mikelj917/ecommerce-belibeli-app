@@ -25,3 +25,4 @@ export * from "./EyeSlash";
 export * from "./CheckCircle";
 export * from "./ExclamationCircle";
 export * from "./ArrowLeft";
+export * from "./XMark";

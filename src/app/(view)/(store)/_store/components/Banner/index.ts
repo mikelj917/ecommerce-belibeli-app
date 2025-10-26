@@ -1,4 +1,3 @@
-export * from "./BannerButton"
 export * from "./BannerIndicator"
 export * from "./CarouselButton"
 export * from "./HeroBanner"

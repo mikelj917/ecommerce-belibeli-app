@@ -20,7 +20,6 @@ API.interceptors.response.use(
     const isProtectedEndpoint = protectedEndpoints.some((endpoint) =>
       config.url?.startsWith(endpoint),
     );
-    console.log(isProtectedEndpoint);
 
     if (status === 401 && isProtectedEndpoint) {
       const currentPath = window.location.pathname;

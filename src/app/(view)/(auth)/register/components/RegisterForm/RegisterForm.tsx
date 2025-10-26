@@ -12,7 +12,7 @@ import Link from "next/link";
 import { SocialLoginButton } from "@/app/(view)/(auth)/components/SocialLoginButton";
 import { SucessRegisterModal } from "../SucessRegisterModal/SucessRegisterModal";
 import { ErrorNotification } from "@/shared/components/ErrorNotification";
-import { useRegister } from "../../hooks/useRegister";
+import { useRegister } from "@/shared/hooks/data/useAuthMutations";
 
 export const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0);

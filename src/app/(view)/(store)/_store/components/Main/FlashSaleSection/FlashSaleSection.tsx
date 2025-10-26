@@ -1,9 +1,9 @@
 "use client";
-import { useProducts } from "@/app/(view)/(store)/hooks/useProducts";
+import { useFindProducts } from "@/shared/hooks/data/useProductsQueries";
 import { ProductsCarousel } from "./ProductsCarousel";
 
 export const FlashSaleSection = () => {
-  const { data, isLoading, isError } = useProducts();
+  const { data, isLoading, isError } = useFindProducts();
 
   const productsOnSale = data?.products.filter((product) => {
     if (!product.promotionEnd) return false;

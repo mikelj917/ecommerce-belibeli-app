@@ -1,15 +1,21 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "./verifyToken";
 
-export async function guardApi(request: NextRequest, pathname: string) {
-  const protectedPaths = ["/api/cart", "/api/wishlist"];
+export async function guardApi(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const protectedPaths = ["/api/cart"];
   const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path));
 
-  if (!isProtectedPath) return NextResponse.next();
+  try {
+    if (!isProtectedPath) return NextResponse.next();
 
-  const { userId } = await verifyToken(request);
+    const token = req.cookies.get("accessToken");
+    const { userId } = await verifyToken(token?.value);
 
-  const response = NextResponse.next();
-  response.headers.set("x-userID", JSON.stringify(userId));
-  return response;
+    const response = NextResponse.next();
+    response.headers.set("x-userID", JSON.stringify(userId));
+    return response;
+  } catch (error) {
+    return NextResponse.json({ message: "Acesso não autorizado" }, { status: 401 });
+  }
 }

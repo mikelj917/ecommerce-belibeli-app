@@ -1,31 +1,33 @@
 export class HttpError extends Error {
-  status: number;
-  constructor(status: number, message: string) {
+  constructor(
+    public status: number,
+    message: string,
+    public details: unknown,
+  ) {
     super(message);
-    this.status = status;
   }
 }
 
 export class BadRequestError extends HttpError {
-  constructor(message: string) {
-    super(400, message);
+  constructor(details: unknown) {
+    super(400, "BadRequestError", details);
   }
 }
 
 export class InternalServerError extends HttpError {
-  constructor(message: string) {
-    super(500, message);
+  constructor(details: unknown) {
+    super(500, "InternalServerError", details);
   }
 }
 
 export class ConflictError extends HttpError {
-  constructor(message: string) {
-    super(409, message);
+  constructor(details: unknown) {
+    super(409, "ConflictError", details);
   }
 }
 
 export class UnauthorizedError extends HttpError {
-  constructor(message: string) {
-    super(401, message);
+  constructor(details: unknown) {
+    super(401, "UnauthorizedError", details);
   }
 }

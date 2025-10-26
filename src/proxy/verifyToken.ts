@@ -1,13 +1,15 @@
 import { UnauthorizedError } from "@/app/api/HttpErrors";
-import { jwtVerify, type JWTPayload } from "jose";
-import type { NextRequest } from "next/server";
+import { JWTPayload, jwtVerify } from "jose";
 
-export async function verifyToken(request: NextRequest) {
-  const token = request.cookies.get("accessToken")?.value;
-  if (!token) throw new UnauthorizedError("Não autorizado: cookie ausente.");
-
+export async function verifyToken(token: string = "") {
+  if (!token) throw new UnauthorizedError("Token não fornecido.");
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-  const { payload } = await jwtVerify(token, secret);
 
-  return payload as JWTPayload & { userId: number; email: string };
+  const { payload } = await jwtVerify(token, secret);
+  const { email, userId } = payload as JWTPayload & {
+    userId: number;
+    email: string;
+  };
+
+  return { email, userId };
 }

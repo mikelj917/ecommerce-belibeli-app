@@ -1,7 +1,9 @@
 "use client";
 import { HeartIcon, ShoppingCartIcon, StarIcon } from "@/assets/Icons";
-import { useCartContext } from "../contexts/CartContext";
 import type { ProductInclude } from "@/shared/types/Includes";
+import { useProductDetailsContext } from "../contexts/CartContext";
+import { isSaleActive } from "@/shared/utils/product/isSaleActive";
+import { getPercentDiscount } from "@/shared/utils/product/getPercentDiscount";
 
 type ProductCardProps = {
   product: ProductInclude;
@@ -10,28 +12,14 @@ type ProductCardProps = {
 
 export const ProductCard = ({ product, grid }: ProductCardProps) => {
   // const [isWishedState, setIsWishedState] = useState(isWished);
-  const { handleCartClick } = useCartContext();
-
-  const onCartClick = async (product: ProductInclude) => handleCartClick(product);
-
-  const onWishClick = () => {};
-
-  const isSaleActive = (product: ProductInclude) => {
-    if (!product.promotionEnd) return false;
-
-    const now = new Date();
-    const end = new Date(product.promotionEnd);
-
-    return now < end;
-  };
+  const { handleOpenProductDetails } = useProductDetailsContext();
 
   const isProductOnSale = isSaleActive(product);
+  const percentDiscount = getPercentDiscount(product);
 
-  const percentDiscount = product.promotionPrice
-    ? Math.floor(
-        ((Number(product.price) - Number(product.promotionPrice)) / Number(product.price)) * 100,
-      )
-    : 0;
+  const onCartClick = async (product: ProductInclude) => handleOpenProductDetails(product);
+
+  const onWishClick = () => {};
 
   // const handleWishlistToggle = () => {
   //   setIsWishedState((prev) => !prev);
@@ -82,24 +70,23 @@ export const ProductCard = ({ product, grid }: ProductCardProps) => {
           <StarIcon className="mr-1 h-3 w-3 fill-yellow-400 stroke-yellow-400" />
           <span className="font-bold text-black">{product.ratingRate.toFixed(1) ?? "–"}</span>
           <span className="mx-1">·</span>
-          <span>{product.ratingCount ? `${product.ratingCount} vendidos` : "Novo"}</span>
+          <span>{product.ratingCount ? `${product.totalSold} vendidos` : "Novo"}</span>
         </div>
 
         {/* Price */}
-        <div>
-          <div className="flex items-center gap-1">
-            <strong className="font-semibold text-gray-800">
-              R$
-              {isProductOnSale
-                ? Number(product.promotionPrice)?.toFixed(2)
-                : Number(product.price).toFixed(2)}
-            </strong>
-            {isProductOnSale && (
-              <span className="text-sm text-red-500 line-through">
-                R${Number(product.price).toFixed(2)}
-              </span>
-            )}
-          </div>
+
+        <div className="flex items-center gap-1">
+          <strong className="font-semibold text-gray-800">
+            R$
+            {isProductOnSale
+              ? Number(product.promotionPrice)?.toFixed(2)
+              : Number(product.price).toFixed(2)}
+          </strong>
+          {isProductOnSale && (
+            <span className="text-sm text-red-500 line-through">
+              R${Number(product.price).toFixed(2)}
+            </span>
+          )}
         </div>
 
         {/* Cart Button */}

@@ -12,14 +12,9 @@ export const registerSchema = z.object({
         .regex(/\d/, "A senha deve conter pelo menos um número."),
       confirmPassword: z.string().min(1, "Confirme a sua senha."),
     })
-    .superRefine((data, ctx) => {
-      if (data.password !== data.confirmPassword) {
-        ctx.addIssue({
-          message: "As senhas não coincidem.",
-          code: "custom",
-          path: ["confirmPassword"],
-        });
-      }
+    .refine(({ password, confirmPassword }) => password === confirmPassword, {
+      path: ["confirmPassword"],
+      error: "As senhas não coincidem",
     }),
 });
 

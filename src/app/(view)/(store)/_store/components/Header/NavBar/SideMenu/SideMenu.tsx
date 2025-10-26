@@ -1,4 +1,4 @@
-import { DownloadIcon } from "@/assets/Icons";
+import { DownloadIcon, XMarkIcon } from "@/assets/Icons";
 import { SideMenuItem } from "./SideMenuItem";
 import { sideMenuMainLinks, sideMenuSupportLinks } from "../MenuItems";
 
@@ -24,11 +24,8 @@ export const SideMenu = ({ onClose, backgroundClassName, sideMenuClassName }: Pr
       >
         <div className="flex items-center justify-between px-4">
           <h1 className="text-2xl font-bold">Menu</h1>
-          <button
-            onClick={onClose}
-            className="h-9 w-9 rounded-full border-2 border-black text-2xl active:bg-black/20"
-          >
-            X
+          <button onClick={onClose}>
+            <XMarkIcon className="size-7" />
           </button>
         </div>
 

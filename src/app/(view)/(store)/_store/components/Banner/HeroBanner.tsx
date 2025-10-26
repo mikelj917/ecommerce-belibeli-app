@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import {
   heroBanners,
-  BannerButton,
   BannerIndicator,
   CarouselButton,
 } from "./index";
@@ -64,9 +63,6 @@ export const HeroBanner = () => {
           </React.Fragment>
         ))}
       </div>
-
-      {/* COMPRAR AGORA */}
-      <BannerButton />
 
       <div className="absolute bottom-7 left-1/2 flex -translate-x-1/2 transform gap-4">
         {heroBanners.map((_, index) => (
