@@ -1,5 +1,6 @@
 import { API } from "@/shared/services/API/API";
 import type { CartInclude } from "@/shared/types/Includes";
+import type { CreateCartParams } from "@/shared/types/Params";
 import type { CartItem } from "@prisma/client";
 
 async function findCart() {
@@ -7,8 +8,9 @@ async function findCart() {
   return response.data;
 }
 
-async function createCart(productID: number) {
-  const response = await API.post<CartItem>("/cart", { productID });
+async function createCart(Params: CreateCartParams) {
+  const { productID, quantity } = Params;
+  const response = await API.post<CartItem>("/cartItem", { productID, quantity });
   return response.data;
 }
 

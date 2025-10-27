@@ -1,7 +1,7 @@
 "use client";
 import { HeartIcon, ShoppingCartIcon, StarIcon } from "@/assets/Icons";
 import type { ProductInclude } from "@/shared/types/Includes";
-import { useProductDetailsContext } from "../contexts/CartContext";
+import { useProductDetailsContext } from "../contexts/ProductDetailsContext";
 import { isSaleActive } from "@/shared/utils/product/isSaleActive";
 import { getPercentDiscount } from "@/shared/utils/product/getPercentDiscount";
 

@@ -3,6 +3,7 @@ import z from "zod";
 const create = z.object({
   userId: z.coerce.number("Valor inválido.").positive("O número deve ser maior que zero."),
   productId: z.coerce.number("Valor inválido.").positive("O número deve ser maior que zero."),
+  quantity: z.coerce.number("Valor inválido."),
 });
 
 const update = z.object({

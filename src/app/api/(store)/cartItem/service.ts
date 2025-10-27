@@ -4,15 +4,16 @@ import { ConflictError } from "../../HttpErrors";
 type CreateParams = {
   userId: number;
   productId: number;
+  quantity: number;
 };
 
-export async function create({ userId, productId }: CreateParams) {
+export async function create({ userId, productId, quantity }: CreateParams) {
   const existingCart = await db.cart.findUnique({ where: { userId } });
 
   if (!existingCart) {
     const { id } = await db.cart.create({ data: { userId } });
     const cartItem = await db.cartItem.create({
-      data: { cartId: id, productId, quantity: 1 },
+      data: { cartId: id, productId, quantity },
     });
 
     return { cartItem };
@@ -35,7 +36,7 @@ export async function create({ userId, productId }: CreateParams) {
     data: {
       cartId: existingCart.id,
       productId,
-      quantity: 1,
+      quantity,
     },
   });
 

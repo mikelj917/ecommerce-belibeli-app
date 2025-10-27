@@ -1,13 +1,12 @@
-import { registerSchema } from "@/app/(view)/(auth)/register/schemas/registerSchema";
 import { validation } from "../utils/validation";
-import { loginSchema } from "@/app/(view)/(auth)/login/schemas/loginSchema";
+import { authSchema } from "./schemas";
 
 function register(data: unknown) {
-  return validation({ data, schema: registerSchema });
+  return validation({ data, schema: authSchema.register });
 }
 
 function login(data: unknown) {
-  return validation({ data, schema: loginSchema });
+  return validation({ data, schema: authSchema.login });
 }
 
 export const authValidate = { register, login };

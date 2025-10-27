@@ -38,7 +38,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 45,
     totalSold: 320,
     category: { connect: { name: "men's clothing" } }, // NOTE: Backpacks are usually in 'accessories' or 'bags'
-    ProductOption: {
+    productOption: {
       create: [colorOptions(["Azul Marinho", "Verde Oliva", "Preto"])],
     },
   },
@@ -53,7 +53,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 120,
     totalSold: 800,
     category: { connect: { name: "men's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Branco", "Cinza Mescla", "Preto"])],
     },
   },
@@ -70,7 +70,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 30,
     totalSold: 950,
     category: { connect: { name: "men's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Bege", "Verde Militar"])],
     },
   },
@@ -85,7 +85,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 200,
     totalSold: 150,
     category: { connect: { name: "men's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Preto", "Azul"])],
     },
   },
@@ -103,7 +103,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 10,
     totalSold: 240,
     category: { connect: { name: "jewelery" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Material",
@@ -125,7 +125,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 25,
     totalSold: 120,
     category: { connect: { name: "jewelery" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Tamanho do Anel",
@@ -177,7 +177,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 80,
     totalSold: 430,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [storageOptions],
     },
   },
@@ -192,7 +192,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 50,
     totalSold: 270,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Capacidade",
@@ -216,7 +216,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 60,
     totalSold: 980,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Capacidade",
@@ -238,7 +238,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 40,
     totalSold: 850,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Compatibilidade",
@@ -262,7 +262,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 15,
     totalSold: 210,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Tamanho",
@@ -284,7 +284,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 10,
     totalSold: 90,
     category: { connect: { name: "electronics" } },
-    ProductOption: {
+    productOption: {
       create: [
         {
           type: "Tamanho",
@@ -306,7 +306,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 60,
     totalSold: 140,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Rosa", "Roxo", "Preto"])],
     },
   },
@@ -323,7 +323,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 80,
     totalSold: 250,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Preto", "Marrom", "Vermelho"])],
     },
   },
@@ -338,7 +338,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 40,
     totalSold: 900,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Azul", "Branco"])],
     },
   },
@@ -355,7 +355,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 25,
     totalSold: 620,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Preto", "Rosa", "Bege"])],
     },
   },
@@ -370,7 +370,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 70,
     totalSold: 380,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Cinza", "Azul Claro"])],
     },
   },
@@ -387,7 +387,7 @@ const products: Prisma.ProductCreateInput[] = [
     stock: 90,
     totalSold: 310,
     category: { connect: { name: "women's clothing" } },
-    ProductOption: {
+    productOption: {
       create: [sizeOptions, colorOptions(["Verde", "Branco"])],
     },
   },

@@ -40,13 +40,13 @@ model Product {
   totalSold      Int       @map("total_sold")
   ratingRate     Float     @map("rating_rate")
   ratingCount    Int       @map("rating_count")
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
 
   categoryId    Int
-  CartItem      CartItem[]
+  cartItem      CartItem[]
   category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  ProductOption ProductOption[]
+  productOption ProductOption[]
 
   @@map("products")
 }
@@ -54,7 +54,7 @@ model Product {
 model ProductOption {
   id        Int                  @id @default(autoincrement())
   product   Product              @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId Int
+  productId Int                  @map("product_id")
   type      String
   values    ProductOptionValue[]
 
@@ -65,15 +65,15 @@ model ProductOptionValue {
   id              Int           @id @default(autoincrement())
   value           String
   productOption   ProductOption @relation(fields: [productOptionId], references: [id], onDelete: Cascade)
-  productOptionId Int
+  productOptionId Int           @map("product_option_id")
 
   @@map("product_option_values")
 }
 
 model Cart {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   userId Int        @unique
   items  CartItem[]
@@ -89,7 +89,7 @@ model CartItem {
   updatedAt DateTime @updatedAt @map("updated_at")
   cartId    Int
 
-  productId Int     @map("rating_count")
+  productId Int     @map("product_id")
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
 

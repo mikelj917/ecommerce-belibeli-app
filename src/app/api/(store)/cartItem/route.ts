@@ -6,10 +6,13 @@ import { handleResponse } from "../../utils/handleResponse";
 
 export async function POST(req: NextRequest) {
   const userId = req.headers.get("x-userID");
-  const productId = (await req.json()).productId;
+  const request = await req.json();
+
+  const productId = request.productID;
+  const quantity = request.quantity;
 
   try {
-    const validatedData = cartItemValidate.create({ userId, productId });
+    const validatedData = cartItemValidate.create({ userId, productId, quantity });
     const result = await cartItemService.create(validatedData);
     return Response.json(result.cartItem);
   } catch (error) {

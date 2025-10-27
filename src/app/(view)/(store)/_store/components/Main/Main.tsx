@@ -1,5 +1,5 @@
 "use client";
-import { useProductDetailsContext } from "../../../contexts/CartContext";
+import { useProductDetailsContext } from "../../../contexts/ProductDetailsContext";
 import { CategoriesSection } from "./CategoriesSection/CategoriesSection";
 import { FlashSaleSection } from "./FlashSaleSection/FlashSaleSection";
 import { ForYouSection } from "./ForYouSection/ForYouSection";

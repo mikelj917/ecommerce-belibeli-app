@@ -2,7 +2,7 @@ export type RegisterRequest = {
   name: string;
   email: string;
   password: string;
-  confirm_password: string;
+  confirmPassword: string;
 };
 
 export type RegisterResponse = {

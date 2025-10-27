@@ -58,7 +58,7 @@ export const RegisterForm = () => {
       {
         ...data,
         password: data.password.password,
-        confirm_password: data.password.confirmPassword,
+        confirmPassword: data.password.confirmPassword,
       },
       {
         onSuccess: () => {

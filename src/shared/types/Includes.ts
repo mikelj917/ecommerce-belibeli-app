@@ -3,7 +3,7 @@ import type { Prisma } from "@prisma/client";
 export type ProductInclude = Prisma.ProductGetPayload<{
   include: {
     category: { select: { id: true; name: true } };
-    ProductOption: { include: { values: true } };
+    productOption: { include: { values: true } };
   };
 }>;
 
