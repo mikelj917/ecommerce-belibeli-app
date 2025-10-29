@@ -15,7 +15,7 @@ export async function GET(req: Request) {
       where: { categoryId: categoryID },
       include: {
         category: { select: { name: true } },
-        productOption: { include: { values: true } },
+        productOption: { include: { values: true } }
       },
       skip: offSet,
       take: limit,

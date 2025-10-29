@@ -1,18 +1,19 @@
 import { NextRequest } from "next/server";
 import { cartItemValidate } from "./validate";
-import { cartItemService } from "./service";
+import { cartItemService, type OptionInput } from "./service";
 import { handleError } from "../../utils/handleError";
 import { handleResponse } from "../../utils/handleResponse";
 
 export async function POST(req: NextRequest) {
   const userId = req.headers.get("x-userID");
-  const request = await req.json();
+  const body = await req.json();
 
-  const productId = request.productID;
-  const quantity = request.quantity;
+  const productId = body.productID;
+  const quantity = body.quantity;
+  const productOptions = body.productOptions;
 
   try {
-    const validatedData = cartItemValidate.create({ userId, productId, quantity });
+    const validatedData = cartItemValidate.create({ userId, productId, productOptions, quantity });
     const result = await cartItemService.create(validatedData);
     return Response.json(result.cartItem);
   } catch (error) {

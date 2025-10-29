@@ -87,12 +87,26 @@ model CartItem {
   quantity  Int      @default(1)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  cartId    Int
 
+  cartId    Int     @map("cart_id")
   productId Int     @map("product_id")
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
+  productOptions CartItemOption[]
+
   @@unique([cartId, productId])
   @@map("cart_items")
+}
+
+model CartItemOption {
+  id            Int @id @default(autoincrement())
+  optionId      Int @map("option_id")
+  optionValueId Int @map("option_value_id")
+
+  cartItemId Int      @map("cart_item_id")
+  CartItem   CartItem @relation(fields: [cartItemId], references: [id], onDelete: Cascade)
+
+  @@unique([cartItemId, optionId])
+  @@map("cart_items_options")
 }

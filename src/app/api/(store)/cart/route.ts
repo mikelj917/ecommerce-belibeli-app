@@ -4,7 +4,7 @@ export async function GET(req: Request) {
   const userId = Number(req.headers.get("x-userID"));
   const cart = await db.cart.findUnique({
     where: { userId },
-    include: { items: { include: { product: true } } },
+    include: { items: { include: { product: true, productOptions: true } } },
   });
 
   return Response.json(cart);

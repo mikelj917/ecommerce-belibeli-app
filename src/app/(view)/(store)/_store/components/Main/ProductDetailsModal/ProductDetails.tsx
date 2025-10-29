@@ -7,6 +7,24 @@ import { QuantitySelector } from "./QuantitySelector";
 import { useState } from "react";
 import { HeartIcon } from "@/assets/Icons";
 import { useCreateCart } from "@/shared/hooks/data/useCartMutations";
+import type { BackendOption } from "@/shared/types/Params";
+import type { ProductOptionsArray } from "@/shared/types/product";
+
+export type SelectedOptionsState = Record<string, number>;
+
+const formatOptionsForBackend = (selectedOptions: SelectedOptionsState): BackendOption[] => {
+  return Object.entries(selectedOptions).map(([optionIdStr, optionValueId]) => ({
+    optionId: parseInt(optionIdStr, 10), // Converte a chave (string) de volta para número
+    optionValueId: optionValueId,
+  }));
+};
+
+const getInitialState = (options: ProductOptionsArray): SelectedOptionsState => {
+  return options.reduce((acc, option) => {
+    acc[option.id.toString()] = option.values[0]?.id || 0;
+    return acc;
+  }, {} as SelectedOptionsState);
+};
 
 export const ProductDetails = () => {
   const { selectedProduct, setIsProductDetailsModalOpen } = useProductDetailsContext();
@@ -15,11 +33,26 @@ export const ProductDetails = () => {
     return <p className="text-red-500">Falha ao carregar os detalhes do produto</p>;
   }
 
-  const [count, setCount] = useState(1);
   const { mutate } = useCreateCart();
+  const [count, setCount] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsState>(() =>
+    getInitialState(selectedProduct.productOption),
+  );
+
+  const { id, image, title, ratingRate, ratingCount, price, promotionPrice, productOption } =
+    selectedProduct;
+
+  const handleSelectOption = (optionId: number, valueId: number) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [optionId.toString()]: valueId,
+    }));
+  };
 
   const handleAddToCart = () => {
-    mutate({ productID: id, quantity: count });
+    const productOptionsPayload = formatOptionsForBackend(selectedOptions);
+
+    mutate({ productID: id, quantity: count, productOptions: productOptionsPayload });
     setIsProductDetailsModalOpen(false);
   };
 
@@ -29,9 +62,6 @@ export const ProductDetails = () => {
     if (count <= 1) return;
     setCount(count - 1);
   };
-
-  const { id, image, title, ratingRate, ratingCount, price, promotionPrice, productOption } =
-    selectedProduct;
 
   const isProductOnSale = isSaleActive(selectedProduct);
   const percentDiscount = getPercentDiscount(selectedProduct);
@@ -74,9 +104,16 @@ export const ProductDetails = () => {
 
         <div className="max-h-[343px] flex-1 overflow-y-auto pt-3">
           {/* Product Options */}
-          {productOption.length > 0 && <ProductOptions key={id} productOptions={productOption} />}
+          {productOption.length > 0 && (
+            <ProductOptions
+              key={id}
+              productOptions={productOption}
+              onSelectOption={handleSelectOption}
+              selectedOptions={selectedOptions}
+            />
+          )}
 
-          {/* Increment Button */}
+          {/* Increment/Decrement Button */}
           <QuantitySelector
             count={count}
             onDecrement={handleDecrement}
