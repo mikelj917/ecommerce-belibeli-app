@@ -39,9 +39,6 @@ Este projeto utiliza a seguinte stack:
 ### 🖥️ Layout e Responsividade
 - **Layout Totalmente Responsivo:** O design se adapta a todas as telas (mobile, tablet e desktop).
 
-💡 **Sugestão de GIF:**  
-Mostre a tela Home se adaptando ao redimensionar a janela (de Desktop para Mobile).
-
 ![GIF: Responsividade da Página Inicial](docs/gifs/belibeliresponsivity.gif)
 
 ---
@@ -49,9 +46,6 @@ Mostre a tela Home se adaptando ao redimensionar a janela (de Desktop para Mobil
 ### 🛒 Navegação e Interação com Produto
 - **Rota Principal (Home):** Contém Header, Banner, Seção de Ofertas Relâmpago e listagem de produtos gerais.  
 - **Interação com Produto (Modal):** No desktop, o hover sobre o card exibe um botão para abrir o modal de detalhes.
-
-💡 **Sugestão de GIF:**  
-Mostre a interação com o card de produto (efeito de hover no desktop) e a abertura do modal de detalhes, onde ocorre a seleção de opções.
 
 ![GIF: Interação com Card de Produto e Abertura do Modal](docs/gifs/product_modal_interaction.gif)
 
