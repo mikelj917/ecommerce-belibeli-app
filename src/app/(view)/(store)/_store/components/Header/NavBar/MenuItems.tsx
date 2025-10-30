@@ -1,4 +1,3 @@
-import { getWishlistIDs } from "@/app/(store)/services/wishListStorage";
 import {
   BoltIcon,
   BagIcon,
@@ -14,7 +13,6 @@ import {
   CreditCardIcon,
   ShoppingCartIcon,
 } from "@/assets/Icons";
-import { link } from "fs";
 
 export const headerActionIcons = [
   {
